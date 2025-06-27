@@ -39,7 +39,7 @@
             picCanvas = new PictureBox();
             panel4 = new Panel();
             label2 = new Label();
-            iconButton1 = new FontAwesome.Sharp.IconButton();
+            btnCone = new FontAwesome.Sharp.IconButton();
             btnCilinder = new FontAwesome.Sharp.IconButton();
             btnSphere = new FontAwesome.Sharp.IconButton();
             btnCube = new FontAwesome.Sharp.IconButton();
@@ -161,7 +161,7 @@
             // panel4
             // 
             panel4.Controls.Add(label2);
-            panel4.Controls.Add(iconButton1);
+            panel4.Controls.Add(btnCone);
             panel4.Controls.Add(btnCilinder);
             panel4.Controls.Add(btnSphere);
             panel4.Controls.Add(btnCube);
@@ -183,28 +183,30 @@
             label2.TabIndex = 4;
             label2.Text = "Figuras";
             // 
-            // iconButton1
+            // btnCone
             // 
-            iconButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            iconButton1.Cursor = Cursors.Hand;
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.Play;
-            iconButton1.IconColor = Color.Black;
-            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton1.IconSize = 40;
-            iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(13, 318);
-            iconButton1.Name = "iconButton1";
-            iconButton1.Size = new Size(177, 43);
-            iconButton1.TabIndex = 3;
-            iconButton1.Text = "Cilindro";
-            iconButton1.UseVisualStyleBackColor = true;
+            btnCone.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btnCone.Cursor = Cursors.Hand;
+            btnCone.Font = new Font("Segoe UI", 12F);
+            btnCone.IconChar = FontAwesome.Sharp.IconChar.Play;
+            btnCone.IconColor = Color.FromArgb(64, 64, 0);
+            btnCone.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnCone.IconSize = 40;
+            btnCone.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCone.Location = new Point(13, 318);
+            btnCone.Name = "btnCone";
+            btnCone.Size = new Size(177, 43);
+            btnCone.TabIndex = 3;
+            btnCone.Text = "Cono";
+            btnCone.UseVisualStyleBackColor = true;
             // 
             // btnCilinder
             // 
             btnCilinder.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnCilinder.Cursor = Cursors.Hand;
+            btnCilinder.Font = new Font("Segoe UI", 12F);
             btnCilinder.IconChar = FontAwesome.Sharp.IconChar.Database;
-            btnCilinder.IconColor = Color.Black;
+            btnCilinder.IconColor = Color.FromArgb(64, 0, 64);
             btnCilinder.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCilinder.IconSize = 40;
             btnCilinder.ImageAlign = ContentAlignment.MiddleLeft;
@@ -219,8 +221,9 @@
             // 
             btnSphere.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnSphere.Cursor = Cursors.Hand;
+            btnSphere.Font = new Font("Segoe UI", 12F);
             btnSphere.IconChar = FontAwesome.Sharp.IconChar.Circle;
-            btnSphere.IconColor = Color.Black;
+            btnSphere.IconColor = Color.FromArgb(0, 0, 64);
             btnSphere.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSphere.IconSize = 40;
             btnSphere.ImageAlign = ContentAlignment.MiddleLeft;
@@ -235,8 +238,9 @@
             // 
             btnCube.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnCube.Cursor = Cursors.Hand;
+            btnCube.Font = new Font("Segoe UI", 12F);
             btnCube.IconChar = FontAwesome.Sharp.IconChar.Cube;
-            btnCube.IconColor = Color.Black;
+            btnCube.IconColor = Color.FromArgb(0, 64, 64);
             btnCube.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCube.IconSize = 40;
             btnCube.ImageAlign = ContentAlignment.MiddleLeft;
@@ -283,7 +287,7 @@
         private Panel panel4;
         private FontAwesome.Sharp.IconButton btnSphere;
         private FontAwesome.Sharp.IconButton btnCube;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton btnCone;
         private FontAwesome.Sharp.IconButton btnCilinder;
         private Label label2;
         private FontAwesome.Sharp.IconButton iconButton3;
