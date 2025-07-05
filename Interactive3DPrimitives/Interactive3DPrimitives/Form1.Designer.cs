@@ -250,6 +250,7 @@
             btnCube.TabIndex = 0;
             btnCube.Text = "Cubo";
             btnCube.UseVisualStyleBackColor = true;
+            btnCube.Click += btnCube_Click;
             // 
             // Form1
             // 

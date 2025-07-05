@@ -6,27 +6,43 @@ namespace Interactive3DPrimitives
 {
     public partial class Form1 : Form
     {
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            Rectangle rect = picCanvas.ClientRectangle;
+        private Cube cubo = new Cube();
+        private Bitmap buffer;
+        private Graphics g;
 
-            using (LinearGradientBrush brush = new LinearGradientBrush(
-                rect,
-                Color.Gray,         
-                Color.White,   
-                LinearGradientMode.Vertical)) 
+
+        public Form1()
+        {
+            InitializeComponent();
+            this.DoubleBuffered = true;
+            
+            buffer = new Bitmap(picCanvas.Width, picCanvas.Height);
+            g = Graphics.FromImage(buffer);
+            picCanvas.Image = buffer;
+
+            Rectangle rect = new Rectangle(0, 0, buffer.Width, buffer.Height);
+            using (LinearGradientBrush brush = new LinearGradientBrush(rect, Color.Gray, Color.White, LinearGradientMode.Vertical))
             {
                 g.FillRectangle(brush, rect);
             }
         }
 
-        public Form1()
+        private void btnCube_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
-            picCanvas.Paint += pictureBox1_Paint;
-            picCanvas.Resize += (s, e) => picCanvas.Invalidate();
+            Rectangle rect = new Rectangle(0, 0, buffer.Width, buffer.Height);
+            using (LinearGradientBrush brush = new LinearGradientBrush(rect, Color.Gray, Color.White, LinearGradientMode.Vertical))
+            {
+                g.FillRectangle(brush, rect);
+            }
 
+            Pen pen = new Pen(Color.Red);
+            cubo.ReadData(pen, picCanvas.Width, picCanvas.Height, 400, g);
+            cubo.drawCube();
+            picCanvas.Image = buffer;
+            picCanvas.Invalidate();
         }
+
+
+
     }
 }
