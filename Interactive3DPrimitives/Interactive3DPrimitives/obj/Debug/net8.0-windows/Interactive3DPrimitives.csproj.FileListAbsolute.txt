@@ -18,3 +18,23 @@ C:\Users\Mateo\Desktop\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPr
 C:\Users\Mateo\Desktop\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\bin\Debug\net8.0-windows\FontAwesome.Sharp.dll
 C:\Users\Mateo\Desktop\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.csproj.AssemblyReference.cache
 C:\Users\Mateo\Desktop\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interact.27CF418E.Up2Date
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\bin\Debug\net8.0-windows\Interactive3DPrimitives.exe
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\bin\Debug\net8.0-windows\Interactive3DPrimitives.deps.json
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\bin\Debug\net8.0-windows\Interactive3DPrimitives.runtimeconfig.json
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\bin\Debug\net8.0-windows\Interactive3DPrimitives.dll
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\bin\Debug\net8.0-windows\Interactive3DPrimitives.pdb
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\bin\Debug\net8.0-windows\FontAwesome.Sharp.dll
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.csproj.AssemblyReference.cache
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.Form1.resources
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.csproj.GenerateResource.cache
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.AssemblyInfoInputs.cache
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.AssemblyInfo.cs
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.csproj.CoreCompileInputs.cache
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.sourcelink.json
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interact.27CF418E.Up2Date
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.dll
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\refint\Interactive3DPrimitives.dll
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.pdb
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\Interactive3DPrimitives.genruntimeconfig.cache
+C:\Users\gmlop\Desktop\ESPE\Computacion Grafica\unidad2\Primitive3DViewer\Interactive3DPrimitives\Interactive3DPrimitives\obj\Debug\net8.0-windows\ref\Interactive3DPrimitives.dll

@@ -16,7 +16,9 @@ namespace Interactive3DPrimitives
         float angleX = 0f;
         float angleY = 0f;
         Color color;
-
+        Cono cone = new Cono();
+        bool conecreated = false;
+        float alt, rad, valInicial = 1;
 
         public Form1()
         {
@@ -43,6 +45,10 @@ namespace Interactive3DPrimitives
                 drawCubeAtScreen(g);
             }
 
+            if (conecreated)
+            {
+                cone.DrawPoint(picCanvas, g);
+            }
         }
 
         private void drawCubeAtScreen(Graphics g)
@@ -59,6 +65,7 @@ namespace Interactive3DPrimitives
             if (!drawCube)
             {
                 drawCube = true;
+                conecreated = false;
                 lbFigure.Text = "Cubo";
             }
             picCanvas.Invalidate();
@@ -82,7 +89,8 @@ namespace Interactive3DPrimitives
         {
             if (holding)
             {
-                if (rotateOn)
+                picCanvas.Invalidate();
+                if (rotateOn && drawCube)
                 {
                     int dx = e.X - previusMouse.X;
                     int dy = -(e.Y - previusMouse.Y);
@@ -91,8 +99,19 @@ namespace Interactive3DPrimitives
                     angleX += dy * 0.01f;
 
                     previusMouse = e.Location;
-                    picCanvas.Invalidate();
+                    
                 }
+                if (rotateOn && conecreated)
+                {
+                    int dx = e.X - previusMouse.X;
+                    int dy = e.Y - previusMouse.Y;
+
+                    cone.RotarY(dx);
+                    cone.RotarX(dy);
+
+                    previusMouse = e.Location;
+                }
+                picCanvas.Invalidate();
             }
         }
 
@@ -123,12 +142,44 @@ namespace Interactive3DPrimitives
 
         private void btnFigureColor_Click(object sender, EventArgs e)
         {
-            if(figureColor.ShowDialog() == DialogResult.OK)
+            if (figureColor.ShowDialog() == DialogResult.OK)
             {
                 picColor.BackColor = figureColor.Color;
                 color = Color.FromArgb(128, figureColor.Color);
                 picCanvas.Invalidate();
             }
+        }
+
+        private void btnCone_Click(object sender, EventArgs e)
+        {
+            if (!conecreated)
+            {
+                conecreated = true;
+                drawCube = false;
+                lbFigure.Text = "Cono";
+            }
+            picCanvas.Invalidate();
+            trackBar1.Value = 1;
+            cone.setCenter(picCanvas.Width / 2, picCanvas.Height / 2);
+            cone.GenerarCono();
+            alt = cone.altura;
+            rad = cone.radio;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            if (!conecreated&&!drawCube)
+            {
+                MessageBox.Show("No puedes manipular la figura sin generarla");
+                return;
+            }
+
+            if (conecreated) {
+                float factor = 5/10 + trackBar1.Value / valInicial;
+                cone.EscalarCono(factor, factor);
+                valInicial = trackBar1.Value;
+            }
+            picCanvas.Invalidate();
         }
     }
 }
