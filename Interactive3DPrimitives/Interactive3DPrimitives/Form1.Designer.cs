@@ -29,11 +29,15 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            label5 = new Label();
+            lbFigure = new Label();
             label1 = new Label();
             panel2 = new Panel();
             panel3 = new Panel();
+            lbMode = new Label();
             trackBar1 = new TrackBar();
-            iconButton3 = new FontAwesome.Sharp.IconButton();
+            label3 = new Label();
+            btnRotate = new FontAwesome.Sharp.IconButton();
             iconButton2 = new FontAwesome.Sharp.IconButton();
             tableLayoutPanel1 = new TableLayoutPanel();
             picCanvas = new PictureBox();
@@ -54,12 +58,36 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(lbFigure);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1084, 53);
+            panel1.Size = new Size(1084, 80);
             panel1.TabIndex = 0;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 15F, FontStyle.Bold | FontStyle.Italic);
+            label5.ForeColor = SystemColors.Control;
+            label5.Location = new Point(17, 49);
+            label5.Name = "label5";
+            label5.Size = new Size(83, 28);
+            label5.TabIndex = 7;
+            label5.Text = "Figura: ";
+            // 
+            // lbFigure
+            // 
+            lbFigure.AutoSize = true;
+            lbFigure.Font = new Font("Segoe UI", 15F, FontStyle.Italic);
+            lbFigure.ForeColor = SystemColors.Control;
+            lbFigure.Location = new Point(99, 49);
+            lbFigure.Name = "lbFigure";
+            lbFigure.Size = new Size(48, 28);
+            lbFigure.TabIndex = 7;
+            lbFigure.Text = "- - -";
             // 
             // label1
             // 
@@ -67,7 +95,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Yu Gothic", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ButtonFace;
-            label1.Location = new Point(392, 5);
+            label1.Location = new Point(418, 9);
             label1.Name = "label1";
             label1.Size = new Size(279, 35);
             label1.TabIndex = 0;
@@ -78,22 +106,35 @@
             panel2.Controls.Add(panel3);
             panel2.Controls.Add(tableLayoutPanel1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 53);
+            panel2.Location = new Point(0, 80);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(10);
-            panel2.Size = new Size(1084, 560);
+            panel2.Size = new Size(1084, 533);
             panel2.TabIndex = 1;
             // 
             // panel3
             // 
+            panel3.Controls.Add(lbMode);
             panel3.Controls.Add(trackBar1);
-            panel3.Controls.Add(iconButton3);
+            panel3.Controls.Add(label3);
+            panel3.Controls.Add(btnRotate);
             panel3.Controls.Add(iconButton2);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(10, 490);
+            panel3.Location = new Point(10, 463);
             panel3.Name = "panel3";
             panel3.Size = new Size(1064, 60);
             panel3.TabIndex = 1;
+            // 
+            // lbMode
+            // 
+            lbMode.AutoSize = true;
+            lbMode.Font = new Font("Segoe UI", 15F, FontStyle.Italic);
+            lbMode.ForeColor = SystemColors.Control;
+            lbMode.Location = new Point(589, 21);
+            lbMode.Name = "lbMode";
+            lbMode.Size = new Size(78, 28);
+            lbMode.TabIndex = 6;
+            lbMode.Text = "Estático";
             // 
             // trackBar1
             // 
@@ -102,18 +143,30 @@
             trackBar1.Size = new Size(287, 45);
             trackBar1.TabIndex = 2;
             // 
-            // iconButton3
+            // label3
             // 
-            iconButton3.Cursor = Cursors.Hand;
-            iconButton3.IconChar = FontAwesome.Sharp.IconChar.RotateBack;
-            iconButton3.IconColor = Color.Black;
-            iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton3.IconSize = 30;
-            iconButton3.Location = new Point(79, 12);
-            iconButton3.Name = "iconButton3";
-            iconButton3.Size = new Size(56, 37);
-            iconButton3.TabIndex = 1;
-            iconButton3.UseVisualStyleBackColor = true;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 15F, FontStyle.Bold | FontStyle.Italic);
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(507, 21);
+            label3.Name = "label3";
+            label3.Size = new Size(76, 28);
+            label3.TabIndex = 5;
+            label3.Text = "Modo: ";
+            // 
+            // btnRotate
+            // 
+            btnRotate.Cursor = Cursors.Hand;
+            btnRotate.IconChar = FontAwesome.Sharp.IconChar.RotateBack;
+            btnRotate.IconColor = Color.Black;
+            btnRotate.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnRotate.IconSize = 30;
+            btnRotate.Location = new Point(79, 12);
+            btnRotate.Name = "btnRotate";
+            btnRotate.Size = new Size(56, 37);
+            btnRotate.TabIndex = 1;
+            btnRotate.UseVisualStyleBackColor = true;
+            btnRotate.Click += btnRotate_Click;
             // 
             // iconButton2
             // 
@@ -145,7 +198,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(1064, 540);
+            tableLayoutPanel1.Size = new Size(1064, 513);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // picCanvas
@@ -154,9 +207,13 @@
             picCanvas.BorderStyle = BorderStyle.Fixed3D;
             picCanvas.Location = new Point(3, 3);
             picCanvas.Name = "picCanvas";
-            picCanvas.Size = new Size(845, 534);
+            picCanvas.Size = new Size(845, 507);
             picCanvas.TabIndex = 0;
             picCanvas.TabStop = false;
+            picCanvas.SizeChanged += picCanvas_SizeChanged;
+            picCanvas.MouseDown += picCanvas_MouseDown;
+            picCanvas.MouseMove += picCanvas_MouseMove;
+            picCanvas.MouseUp += picCanvas_MouseUp;
             // 
             // panel4
             // 
@@ -168,7 +225,7 @@
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(854, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(207, 534);
+            panel4.Size = new Size(207, 507);
             panel4.TabIndex = 1;
             // 
             // label2
@@ -177,7 +234,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             label2.ForeColor = Color.FromArgb(255, 192, 128);
-            label2.Location = new Point(46, 33);
+            label2.Location = new Point(46, 19);
             label2.Name = "label2";
             label2.Size = new Size(110, 37);
             label2.TabIndex = 4;
@@ -193,7 +250,7 @@
             btnCone.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCone.IconSize = 40;
             btnCone.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCone.Location = new Point(13, 318);
+            btnCone.Location = new Point(13, 304);
             btnCone.Name = "btnCone";
             btnCone.Size = new Size(177, 43);
             btnCone.TabIndex = 3;
@@ -210,7 +267,7 @@
             btnCilinder.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCilinder.IconSize = 40;
             btnCilinder.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCilinder.Location = new Point(13, 247);
+            btnCilinder.Location = new Point(13, 233);
             btnCilinder.Name = "btnCilinder";
             btnCilinder.Size = new Size(177, 43);
             btnCilinder.TabIndex = 2;
@@ -227,7 +284,7 @@
             btnSphere.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSphere.IconSize = 40;
             btnSphere.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSphere.Location = new Point(13, 183);
+            btnSphere.Location = new Point(13, 169);
             btnSphere.Name = "btnSphere";
             btnSphere.Size = new Size(177, 43);
             btnSphere.TabIndex = 1;
@@ -244,7 +301,7 @@
             btnCube.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCube.IconSize = 40;
             btnCube.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCube.Location = new Point(13, 117);
+            btnCube.Location = new Point(13, 103);
             btnCube.Name = "btnCube";
             btnCube.Size = new Size(177, 43);
             btnCube.TabIndex = 0;
@@ -291,8 +348,12 @@
         private FontAwesome.Sharp.IconButton btnCone;
         private FontAwesome.Sharp.IconButton btnCilinder;
         private Label label2;
-        private FontAwesome.Sharp.IconButton iconButton3;
+        private FontAwesome.Sharp.IconButton btnRotate;
         private FontAwesome.Sharp.IconButton iconButton2;
         private TrackBar trackBar1;
+        private Label label3;
+        private Label lbMode;
+        private Label label5;
+        private Label lbFigure;
     }
 }
