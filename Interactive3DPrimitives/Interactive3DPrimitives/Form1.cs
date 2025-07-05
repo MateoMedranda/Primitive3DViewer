@@ -15,6 +15,7 @@ namespace Interactive3DPrimitives
         private Point previusMouse;
         float angleX = 0f;
         float angleY = 0f;
+        Color color;
 
 
         public Form1()
@@ -46,8 +47,8 @@ namespace Interactive3DPrimitives
 
         private void drawCubeAtScreen(Graphics g)
         {
-            Pen pen = new Pen(Color.Red);
-            cubo.ReadData(pen, picCanvas.Width, picCanvas.Height, 400, g);
+            Pen pen = new Pen(Color.Black, 2);
+            cubo.ReadData(color, picCanvas.Width, picCanvas.Height, 400, g);
             cubo.changeAngle(-angleX, -angleY);
             cubo.drawCube();
         }
@@ -118,6 +119,16 @@ namespace Interactive3DPrimitives
                 lbMode.Text = "Estático";
             }
 
+        }
+
+        private void btnFigureColor_Click(object sender, EventArgs e)
+        {
+            if(figureColor.ShowDialog() == DialogResult.OK)
+            {
+                picColor.BackColor = figureColor.Color;
+                color = Color.FromArgb(128, figureColor.Color);
+                picCanvas.Invalidate();
+            }
         }
     }
 }

@@ -34,6 +34,8 @@
             label1 = new Label();
             panel2 = new Panel();
             panel3 = new Panel();
+            picColor = new PictureBox();
+            btnFigureColor = new FontAwesome.Sharp.IconButton();
             lbMode = new Label();
             trackBar1 = new TrackBar();
             label3 = new Label();
@@ -47,9 +49,11 @@
             btnCilinder = new FontAwesome.Sharp.IconButton();
             btnSphere = new FontAwesome.Sharp.IconButton();
             btnCube = new FontAwesome.Sharp.IconButton();
+            figureColor = new ColorDialog();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picColor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picCanvas).BeginInit();
@@ -114,6 +118,8 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(picColor);
+            panel3.Controls.Add(btnFigureColor);
             panel3.Controls.Add(lbMode);
             panel3.Controls.Add(trackBar1);
             panel3.Controls.Add(label3);
@@ -125,12 +131,35 @@
             panel3.Size = new Size(1064, 60);
             panel3.TabIndex = 1;
             // 
+            // picColor
+            // 
+            picColor.BackColor = Color.Transparent;
+            picColor.BorderStyle = BorderStyle.FixedSingle;
+            picColor.Location = new Point(522, 9);
+            picColor.Name = "picColor";
+            picColor.Size = new Size(17, 42);
+            picColor.TabIndex = 8;
+            picColor.TabStop = false;
+            // 
+            // btnFigureColor
+            // 
+            btnFigureColor.IconChar = FontAwesome.Sharp.IconChar.Palette;
+            btnFigureColor.IconColor = Color.Black;
+            btnFigureColor.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnFigureColor.IconSize = 32;
+            btnFigureColor.Location = new Point(472, 9);
+            btnFigureColor.Name = "btnFigureColor";
+            btnFigureColor.Size = new Size(44, 42);
+            btnFigureColor.TabIndex = 7;
+            btnFigureColor.UseVisualStyleBackColor = true;
+            btnFigureColor.Click += btnFigureColor_Click;
+            // 
             // lbMode
             // 
             lbMode.AutoSize = true;
             lbMode.Font = new Font("Segoe UI", 15F, FontStyle.Italic);
             lbMode.ForeColor = SystemColors.Control;
-            lbMode.Location = new Point(589, 21);
+            lbMode.Location = new Point(644, 12);
             lbMode.Name = "lbMode";
             lbMode.Size = new Size(78, 28);
             lbMode.TabIndex = 6;
@@ -148,7 +177,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 15F, FontStyle.Bold | FontStyle.Italic);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(507, 21);
+            label3.Location = new Point(562, 12);
             label3.Name = "label3";
             label3.Size = new Size(76, 28);
             label3.TabIndex = 5;
@@ -325,6 +354,7 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picColor).EndInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picCanvas).EndInit();
@@ -355,5 +385,8 @@
         private Label lbMode;
         private Label label5;
         private Label lbFigure;
+        private FontAwesome.Sharp.IconButton btnFigureColor;
+        private ColorDialog figureColor;
+        private PictureBox picColor;
     }
 }

@@ -15,7 +15,7 @@ namespace Interactive3DPrimitives
         private float angleX = 0f;
         private float angleY = 0f;
         private Graphics mgraph;
-        private Pen mpen;
+        private Color colorCube;
 
 
         public Cube() {
@@ -35,12 +35,12 @@ namespace Interactive3DPrimitives
             };
         }
 
-        public void ReadData(Pen p, int camWidth, int camHeight,int nd, Graphics g)
+        public void ReadData(Color color, int camWidth, int camHeight,int nd, Graphics g)
         {
             canvasWidth = camWidth;
             canvasHeight = camHeight;
             mgraph = g;
-            mpen = p;
+            colorCube = color;
             d = nd;
         }
 
@@ -90,12 +90,25 @@ namespace Interactive3DPrimitives
                 pointds2D[i] = proyectPoint(x, y, z);
             }
 
+            Pen mpen = new Pen(Color.Black,2);
             mgraph.DrawPolygon(mpen, new[] { pointds2D[0], pointds2D[1], pointds2D[2], pointds2D[3] });
             mgraph.DrawPolygon(mpen, new[] { pointds2D[4], pointds2D[5], pointds2D[6], pointds2D[7] });
+            mgraph.DrawPolygon(mpen, new[] { pointds2D[0], pointds2D[4], pointds2D[5], pointds2D[1] });
+            mgraph.DrawPolygon(mpen, new[] { pointds2D[2], pointds2D[6], pointds2D[7], pointds2D[3] });
+
+            Brush mbrush = new SolidBrush(colorCube);
+
+            mgraph.FillPolygon(mbrush, new[] { pointds2D[0], pointds2D[1], pointds2D[2], pointds2D[3] });
+            mgraph.FillPolygon(mbrush, new[] { pointds2D[4], pointds2D[5], pointds2D[6], pointds2D[7] });
+            mgraph.FillPolygon(mbrush, new[] { pointds2D[0], pointds2D[4], pointds2D[5], pointds2D[1] });
+            mgraph.FillPolygon(mbrush, new[] { pointds2D[2], pointds2D[6], pointds2D[7], pointds2D[3] });
+
+            /*
             for (int i = 0; i < 4; i++)
             {
                 mgraph.DrawLine(mpen, pointds2D[i], pointds2D[i + 4]);
             }
+            */
         }
 
 
