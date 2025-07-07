@@ -17,7 +17,7 @@ namespace Interactive3DPrimitives
         private Point previusMouse;
         float angleX = 0f;
         float angleY = 0f;
-        Color color;
+        Color color = Color.FromArgb(50,255,0,0);
         Cono cone = new Cono();
         bool conecreated = false;
         float mousScrollValue = 1;
@@ -29,6 +29,8 @@ namespace Interactive3DPrimitives
             this.DoubleBuffered = true;
             picCanvas.Paint += picCanvas_Paint;
             this.MouseWheel += Form1_MouseWheel;
+            this.Load += Form1_Load;
+
         }
 
         private void picCanvas_Paint(object sender, PaintEventArgs e)
@@ -55,6 +57,7 @@ namespace Interactive3DPrimitives
 
             if (conecreated)
             {
+                cone.setColor(color);
                 cone.DrawPoint(picCanvas, g);
             }
         }
@@ -83,6 +86,7 @@ namespace Interactive3DPrimitives
             {
                 drawCube = true;
                 conecreated = false;
+                drawSphere = false;
                 lbFigure.Text = "Cubo";
             }
             picCanvas.Invalidate();
@@ -125,7 +129,7 @@ namespace Interactive3DPrimitives
 
                     previusMouse = e.Location;
                 }
-                if(rotateOn && drawSphere)
+                if (rotateOn && drawSphere)
                 {
                     angleY += dx * 0.01f;
                     angleX += dy * 0.01f;
@@ -176,10 +180,10 @@ namespace Interactive3DPrimitives
             {
                 conecreated = true;
                 drawCube = false;
+                drawSphere = false;
                 lbFigure.Text = "Cono";
             }
             picCanvas.Invalidate();
-            trackBar1.Value = 1;
             cone.setCenter(picCanvas.Width / 2, picCanvas.Height / 2);
             cone.GenerarCono();
             alt = cone.altura;
@@ -187,14 +191,15 @@ namespace Interactive3DPrimitives
         }
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (!conecreated && !drawCube)
-            if (!conecreated && !drawCube)
-            {
-                MessageBox.Show("No puedes manipular la figura sin generarla");
-                return;
-            }
 
-            if(mousScrollValue==1&& e.Delta <0) {
+                if (!conecreated && !drawCube)
+                {
+                    MessageBox.Show("No puedes manipular la figura sin generarla");
+                    return;
+                }
+
+            if (mousScrollValue == 1 && e.Delta < 0)
+            {
                 MessageBox.Show("No puedes achicar mas la figura");
                 return;
             }
@@ -224,5 +229,50 @@ namespace Interactive3DPrimitives
             }
             picCanvas.Invalidate();
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (!conecreated && !drawCube)
+            {
+                MessageBox.Show("No puedes manipular la figura sin generarla");
+                return true;
+            }
+
+            int mov = 0;
+            if (keyData == Keys.Up) mov = 1;
+            else if (keyData == Keys.Down) mov = 2;
+            else if (keyData == Keys.Left) mov = 3;
+            else if (keyData == Keys.Right) mov = 4;
+
+            if (conecreated)
+            {
+                switch (mov)
+                {
+                    case 1:
+                        cone.MoverPuntosY(5);
+                        break;
+                    case 2:
+                        cone.MoverPuntosY(-5);
+                        break;
+                    case 3:
+                        cone.MoverPuntosX(-5);
+                        break;
+                    case 4:
+                        cone.MoverPuntosX(5);
+                        break;
+                }
+                picCanvas.Invalidate();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+            this.Focus();
+        }
+
     }
 }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MATEO\\Desktop\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj": {}
+    "C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MATEO\\Desktop\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj": {
+    "C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MATEO\\Desktop\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
+        "projectUniqueName": "C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
         "projectName": "Interactive3DPrimitives",
-        "projectPath": "C:\\Users\\MATEO\\Desktop\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
-        "packagesPath": "C:\\Users\\MATEO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MATEO\\Desktop\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\obj\\",
+        "projectPath": "C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
+        "packagesPath": "C:\\Users\\gmlop\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\MATEO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gmlop\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -74,7 +74,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

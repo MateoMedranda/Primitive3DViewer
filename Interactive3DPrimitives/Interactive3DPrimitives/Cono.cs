@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Interactive3DPrimitives
 {
@@ -43,12 +44,28 @@ namespace Interactive3DPrimitives
     class Cono
     {
         public float altura = 50, radio = 40;
-        public int segmentos = 30;
+        public int segmentos = 40;
         public float centroX, centroY;
         List<Vector3> puntos;
+        SolidBrush color = new SolidBrush(System.Drawing.Color.FromArgb(100,255,0,0));
+        SolidBrush baseP = new SolidBrush(System.Drawing.Color.FromArgb(100, 0, 0, 255));
         public Cono()
         {
 
+        }
+        public void setColor(System.Drawing.Color colorSelected)
+        {
+            color?.Dispose();
+            baseP?.Dispose();
+
+            color = new SolidBrush(colorSelected);
+            System.Drawing.Color inverso = (System.Drawing.Color.FromArgb(
+                colorSelected.A,                   
+                255 - colorSelected.R,
+                100 - colorSelected.G,
+                255 - colorSelected.B
+            ));
+            baseP = new SolidBrush(inverso);
         }
         public void setValues(float alt, float rad, int segm)
         {
@@ -79,7 +96,7 @@ namespace Interactive3DPrimitives
 
         }
 
-        public void MoverPuntosX(List<Vector3> puntos, float desplazamiento)
+        public void MoverPuntosX( float desplazamiento)
         {
             for (int i = 0; i < puntos.Count; i++)
             {
@@ -87,14 +104,14 @@ namespace Interactive3DPrimitives
             }
         }
 
-        public void MoverPuntosY(List<Vector3> puntos, float desplazamiento)
+        public void MoverPuntosY(float desplazamiento)
         {
             for (int i = 0; i < puntos.Count; i++)
             {
                 puntos[i].setY(puntos[i].getY() + desplazamiento);
             }
         }
-        public void MoverPuntosZ(List<Vector3> puntos, float desplazamiento)
+        public void MoverPuntosZ( float desplazamiento)
         {
             for (int i = 0; i < puntos.Count; i++)
             {
@@ -103,39 +120,47 @@ namespace Interactive3DPrimitives
         }
 
         public void DrawPoint(PictureBox Pcanvas,Graphics g)
-        {
-
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                Pen basePen = new Pen(Color.Blue, 1);
-                Pen sidePen = new Pen(Color.Red, 1);
-                Vector3 centroBase = puntos[0];
-                Vector3 vertice = puntos[puntos.Count - 1];
-
-                for (int i = 1; i < segmentos + 1; i++)
-                {
-                    Vector3 actual = puntos[i];
-                    Vector3 siguiente = puntos[i + 1];
-
-                    g.DrawLine(basePen,
-                        new PointF(actual.X + centroX, -actual.Y + centroY),
-                        new PointF(siguiente.X + centroX, -siguiente.Y + centroY));
-                }
-
-                for (int i = 1; i < segmentos + 1; i++)
-                {
-                    Vector3 borde = puntos[i];
-
-                    g.DrawLine(sidePen,
-                        new PointF(borde.X + centroX, -borde.Y + centroY),
-                        new PointF(vertice.X + centroX, -vertice.Y + centroY));
-
-                    g.FillEllipse(Brushes.Black,
-                        borde.X + centroX - 3, -borde.Y + centroY - 3, 3, 3);
-                }
-
-                g.FillEllipse(Brushes.Black,
-                    vertice.X + centroX - 1, -vertice.Y + centroY - 1, 3, 3);
+        {    
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             
+
+            Vector3 centroBase = puntos[0];
+            Vector3 vertice = puntos[puntos.Count - 1];
+            PointF[] basePolygon = new PointF[segmentos];
+                            
+            for (int i = 0; i < segmentos ; i++)               
+            {
+                Vector3 p = puntos[i+1];
+                basePolygon[i] = new PointF(p.X + centroX, -p.Y + centroY);
+            }
+            
+            g.FillPolygon(baseP, basePolygon);
+                               
+            for (int i = 1; i < segmentos + 1; i++)               
+            {
+                Vector3 actual = puntos[i];
+                Vector3 siguiente = puntos[i + 1];
+
+                PointF[] cara = new PointF[3];
+                cara[0] = new PointF(actual.X + centroX, -actual.Y + centroY);
+                cara[1] = new PointF(siguiente.X + centroX, -siguiente.Y + centroY);
+                cara[2] = new PointF(vertice.X + centroX, -vertice.Y + centroY);
+
+                g.FillPolygon(color, cara);
+            }
+
+
+            for (int i = 1; i <= segmentos; i++)
+            {
+                Vector3 borde = puntos[i];
+
+                g.FillEllipse(System.Drawing.Brushes.Black,
+                    borde.X + centroX - 3, -borde.Y + centroY - 3, 3, 3);
+            }
+
+            g.FillEllipse(System.Drawing.Brushes.Black,
+                vertice.X + centroX - 1, -vertice.Y + centroY - 1, 3, 3);
+
         }
 
 
@@ -143,25 +168,42 @@ namespace Interactive3DPrimitives
         {
             float rad = angulo * (float)Math.PI / 180f;
 
+            Vector3 centro = puntos[0];
+
             foreach (var p in puntos)
             {
-                float y = p.getY();
-                float z = p.getZ();
-                p.setY(y * (float)Math.Cos(rad) - z * (float)Math.Sin(rad));
-                p.setZ(y * (float)Math.Sin(rad) + z * (float)Math.Cos(rad));
+                float x = p.X - centro.X;
+                float y = p.Y - centro.Y;
+                float z = p.Z - centro.Z;
+
+                float yRot = y * (float)Math.Cos(rad) - z * (float)Math.Sin(rad);
+                float zRot = y * (float)Math.Sin(rad) + z * (float)Math.Cos(rad);
+
+                p.X = centro.X + x;
+                p.Y = centro.Y + yRot;
+                p.Z = centro.Z + zRot;
             }
         }
+        
 
         public void RotarY(float angulo)
         {
             float rad = angulo * (float)Math.PI / 180f;
 
+            Vector3 centro = puntos[0];  
+
             foreach (var p in puntos)
             {
-                float x = p.getX();
-                float z = p.getZ();
-                p.setX(x * (float)Math.Cos(rad) + z * (float)Math.Sin(rad));
-                p.setZ(-x * (float)Math.Sin(rad) + z * (float)Math.Cos(rad));
+                float x = p.X - centro.X;
+                float y = p.Y - centro.Y;
+                float z = p.Z - centro.Z;
+
+                float xRot = x * (float)Math.Cos(rad) + z * (float)Math.Sin(rad);
+                float zRot = -x * (float)Math.Sin(rad) + z * (float)Math.Cos(rad);
+
+                p.X = centro.X + xRot;
+                p.Y = centro.Y + y;
+                p.Z = centro.Z + zRot;
             }
         }
 
@@ -169,14 +211,23 @@ namespace Interactive3DPrimitives
         {
             float rad = angulo * (float)Math.PI / 180f;
 
+            Vector3 centro = puntos[0];
+
             foreach (var p in puntos)
             {
-                float x = p.getX();
-                float y = p.getY();
-                p.setX(x * (float)Math.Cos(rad) - y * (float)Math.Sin(rad));
-                p.setY(x * (float)Math.Sin(rad) + y * (float)Math.Cos(rad));
+                float x = p.X - centro.X;
+                float y = p.Y - centro.Y;
+                float z = p.Z - centro.Z;
+
+                float xRot = x * (float)Math.Cos(rad) - y * (float)Math.Sin(rad);
+                float yRot = x * (float)Math.Sin(rad) + y * (float)Math.Cos(rad);
+
+                p.X = centro.X + xRot;
+                p.Y = centro.Y + yRot;
+                p.Z = centro.Z + z;
             }
         }
+
 
         public void EscalarCono(float factorRadio, float factorAltura)
         {
