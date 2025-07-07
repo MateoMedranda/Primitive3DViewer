@@ -1,0 +1,144 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using Microsoft.VisualBasic.Devices;
+
+namespace Interactive3DPrimitives
+{
+    internal class Cilindro
+    {
+        private int radioBase;
+        private int alturaCilindro;
+        private List<Vector3> baseInferior;
+        private List<Vector3> baseSuperior;
+        private List<Vector3> puntos;
+        private int screenCenterX;
+        private int screenCenterY;
+        private int segmentosVerticales;
+
+        public Cilindro()
+        {
+            radioBase = 100;
+            alturaCilindro = 400;
+            segmentosVerticales = 36;
+        }
+        public void setCenter(int centerX, int centerY)
+        {
+            screenCenterX = centerX;
+            screenCenterY = centerY;
+        }
+        public void generateCylinder()
+        {
+            baseInferior = new List<Vector3>();
+            baseSuperior = new List<Vector3>();
+            int midHeight = alturaCilindro / 2;
+            baseInferior.Add(new Vector3(0, -midHeight, 0));
+            baseSuperior.Add(new Vector3(0, midHeight,0));
+            for (int i = 0; i <= segmentosVerticales; i++)
+            {
+                float angulo = 2 * (float)Math.PI * i / segmentosVerticales;
+                float x = radioBase * (float)Math.Cos(angulo);
+                float y = radioBase * (float)Math.Sin(angulo);
+                baseInferior.Add(new Vector3(x,-midHeight,y));
+                baseSuperior.Add(new Vector3(x, midHeight,y));
+            }
+        }
+        public void DrawPoint(PictureBox Pcanvas, Graphics g)
+        {
+
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            Pen cPen = new Pen(Color.Black, 2);
+            Vector3 centroBaseI = baseInferior[0];
+
+            for (int i = 1; i < segmentosVerticales + 1; i++)
+            {
+                Vector3 actual = baseInferior[i];
+                Vector3 siguiente = baseInferior[i + 1];
+                g.DrawLine(cPen, new PointF(actual.X + screenCenterX, -actual.Y + screenCenterY),
+               new PointF(siguiente.X + screenCenterX, -siguiente.Y + screenCenterY));
+            }
+            for (int i = 1; i < segmentosVerticales + 1; i++)
+            {
+                Vector3 actual = baseSuperior[i];
+                Vector3 siguiente = baseSuperior[i + 1];
+                g.DrawLine(cPen, new PointF(actual.X + screenCenterX, -actual.Y + screenCenterY),
+               new PointF(siguiente.X + screenCenterX, -siguiente.Y + screenCenterY));
+            }
+            for (int i = 1; i < segmentosVerticales; i+=(segmentosVerticales/12))
+            {
+                Vector3 superior = baseSuperior[i];
+                Vector3 inferior = baseInferior[i];
+                g.DrawLine(cPen, new PointF(inferior.X + screenCenterX, -inferior.Y + screenCenterY),
+               new PointF(superior.X + screenCenterX, -superior.Y + screenCenterY));
+            }
+        }
+        public void RotarX(float angulo)
+        {
+            float rad = angulo * (float)Math.PI / 180f;
+
+            foreach (var low in baseInferior)
+            {
+                float y = low.getY();
+                float z = low.getZ();
+                low.setY(y * (float)Math.Cos(rad) - z * (float)Math.Sin(rad));
+                low.setZ(y * (float)Math.Sin(rad) + z * (float)Math.Cos(rad));
+            }
+            foreach (var top in baseSuperior)
+            {
+                float y = top.getY();
+                float z = top.getZ();
+                top.setY(y * (float)Math.Cos(rad) - z * (float)Math.Sin(rad));
+                top.setZ(y * (float)Math.Sin(rad) + z * (float)Math.Cos(rad));
+            }
+        }
+
+        public void RotarY(float angulo)
+        {
+            float rad = angulo * (float)Math.PI / 180f;
+
+            foreach (var low in baseInferior)
+            {
+                float x = low.getX();
+                float z = low.getZ();
+                low.setX(x * (float)Math.Cos(rad) + z * (float)Math.Sin(rad));
+                low.setZ(-x * (float)Math.Sin(rad) + z * (float)Math.Cos(rad));
+            }
+            foreach (var top in baseSuperior)
+            {
+                float x = top.getX();
+                float z = top.getZ();
+                top.setX(x * (float)Math.Cos(rad) + z * (float)Math.Sin(rad));
+                top.setZ(-x * (float)Math.Sin(rad) + z * (float)Math.Cos(rad));
+            }
+        }
+
+        public void RotarZ(float angulo)
+        {
+            float rad = angulo * (float)Math.PI / 180f;
+            foreach (var low in baseInferior)
+            {
+                float x = low.getX();
+                float y = low.getY();
+                low.setY(x * (float)Math.Cos(rad) - y * (float)Math.Sin(rad));
+                low.setZ(x * (float)Math.Sin(rad) + y * (float)Math.Cos(rad));
+            }
+            foreach (var top in baseSuperior)
+            {
+                float x = top.getX();
+                float y = top.getY();
+                top.setY(x * (float)Math.Cos(rad) - y * (float)Math.Sin(rad));
+                top.setZ(x * (float)Math.Sin(rad) + y * (float)Math.Cos(rad));
+            }
+        }
+
+        public void drawCylinder()
+        {
+
+        }
+
+    }
+
+}

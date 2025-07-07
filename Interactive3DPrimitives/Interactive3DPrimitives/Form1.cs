@@ -12,13 +12,15 @@ namespace Interactive3DPrimitives
         private Graphics g;
         private bool drawCube = false;
         private bool drawSphere = false;
+        private bool drawCylinder = false;
         private bool holding = false;
         private bool rotateOn = false;
         private Point previusMouse;
         float angleX = 0f;
         float angleY = 0f;
-        Color color = Color.FromArgb(50,255,0,0);
+        Color color = Color.FromArgb(50, 255, 0, 0);
         Cono cone = new Cono();
+        Cilindro cilinder = new Cilindro();
         bool conecreated = false;
         float mousScrollValue = 1;
         float alt, rad, valInicial = 1;
@@ -59,6 +61,10 @@ namespace Interactive3DPrimitives
             {
                 cone.setColor(color);
                 cone.DrawPoint(picCanvas, g);
+            }
+            if (drawCylinder)
+            {
+                cilinder.DrawPoint(picCanvas, g);
             }
         }
 
@@ -135,6 +141,12 @@ namespace Interactive3DPrimitives
                     angleX += dy * 0.01f;
                     previusMouse = e.Location;
                 }
+                if (rotateOn && drawCylinder)
+                {
+                    cilinder.RotarY(dx);
+                    cilinder.RotarX(dy);
+                    previusMouse = e.Location;
+                }
                 picCanvas.Invalidate();
             }
         }
@@ -192,11 +204,11 @@ namespace Interactive3DPrimitives
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
 
-                if (!conecreated && !drawCube)
-                {
-                    MessageBox.Show("No puedes manipular la figura sin generarla");
-                    return;
-                }
+            if (!conecreated && !drawCube)
+            {
+                MessageBox.Show("No puedes manipular la figura sin generarla");
+                return;
+            }
 
             if (mousScrollValue == 1 && e.Delta < 0)
             {
@@ -274,5 +286,19 @@ namespace Interactive3DPrimitives
             this.Focus();
         }
 
+        private void btnCilinder_Click(object sender, EventArgs e)
+        {
+            if (!drawCylinder)
+            {
+                drawCylinder = true;
+                drawSphere = false;
+                drawCube = false;
+                conecreated = false;
+                lbFigure.Text = "Cilindro";
+            }
+            cilinder.setCenter(picCanvas.Width/2, picCanvas.Height/2);
+            cilinder.generateCylinder();
+            picCanvas.Invalidate();
+        }
     }
 }
