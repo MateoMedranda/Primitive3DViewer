@@ -7,9 +7,11 @@ namespace Interactive3DPrimitives
     public partial class Form1 : Form
     {
         private Cube cubo = new Cube();
+        private Sphere esfera = new Sphere();
         private Bitmap buffer;
         private Graphics g;
         private bool drawCube = false;
+        private bool drawSphere = false;
         private bool holding = false;
         private bool rotateOn = false;
         private Point previusMouse;
@@ -45,6 +47,11 @@ namespace Interactive3DPrimitives
                 drawCubeAtScreen(g);
             }
 
+            if (drawSphere)
+            {
+                drawSphereAtScreen(g);
+            }
+
             if (conecreated)
             {
                 cone.DrawPoint(picCanvas, g);
@@ -57,6 +64,15 @@ namespace Interactive3DPrimitives
             cubo.ReadData(color, picCanvas.Width, picCanvas.Height, 400, g);
             cubo.changeAngle(-angleX, -angleY);
             cubo.drawCube();
+        }
+
+        private void drawSphereAtScreen(Graphics g)
+        {
+            Pen pen = new Pen(Color.Black, 2);
+            esfera.genetateSphere();
+            esfera.ReadData(color, picCanvas.Width, picCanvas.Height, 400, g);
+            esfera.changeAngle(-angleX, -angleY);
+            esfera.drawSphere();
         }
 
 
@@ -89,26 +105,29 @@ namespace Interactive3DPrimitives
         {
             if (holding)
             {
+                int dx = e.X - previusMouse.X;
+                int dy = -(e.Y - previusMouse.Y);
+
                 picCanvas.Invalidate();
                 if (rotateOn && drawCube)
                 {
-                    int dx = e.X - previusMouse.X;
-                    int dy = -(e.Y - previusMouse.Y);
-
                     angleY += dx * 0.01f;
                     angleX += dy * 0.01f;
-
                     previusMouse = e.Location;
-                    
+
                 }
                 if (rotateOn && conecreated)
                 {
-                    int dx = e.X - previusMouse.X;
-                    int dy = e.Y - previusMouse.Y;
 
                     cone.RotarY(dx);
                     cone.RotarX(dy);
 
+                    previusMouse = e.Location;
+                }
+                if(rotateOn && drawSphere)
+                {
+                    angleY += dx * 0.01f;
+                    angleX += dy * 0.01f;
                     previusMouse = e.Location;
                 }
                 picCanvas.Invalidate();
@@ -168,16 +187,29 @@ namespace Interactive3DPrimitives
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            if (!conecreated&&!drawCube)
+            if (!conecreated && !drawCube)
             {
                 MessageBox.Show("No puedes manipular la figura sin generarla");
                 return;
             }
 
-            if (conecreated) {
-                float factor = 5/10 + trackBar1.Value / valInicial;
+            if (conecreated)
+            {
+                float factor = 5 / 10 + trackBar1.Value / valInicial;
                 cone.EscalarCono(factor, factor);
                 valInicial = trackBar1.Value;
+            }
+            picCanvas.Invalidate();
+        }
+
+        private void btnSphere_Click(object sender, EventArgs e)
+        {
+            if (!drawSphere)
+            {
+                drawSphere = true;
+                drawCube = false;
+                conecreated = false;
+                lbFigure.Text = "Esfera";
             }
             picCanvas.Invalidate();
         }
