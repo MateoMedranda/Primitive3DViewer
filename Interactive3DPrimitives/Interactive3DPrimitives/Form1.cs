@@ -93,6 +93,7 @@ namespace Interactive3DPrimitives
                 drawCube = true;
                 conecreated = false;
                 drawSphere = false;
+                drawCylinder = false;
                 lbFigure.Text = "Cubo";
             }
             picCanvas.Invalidate();
@@ -193,6 +194,7 @@ namespace Interactive3DPrimitives
                 conecreated = true;
                 drawCube = false;
                 drawSphere = false;
+                drawCylinder = false;
                 lbFigure.Text = "Cono";
             }
             picCanvas.Invalidate();
@@ -237,6 +239,7 @@ namespace Interactive3DPrimitives
                 drawSphere = true;
                 drawCube = false;
                 conecreated = false;
+                drawCylinder=false;
                 lbFigure.Text = "Esfera";
             }
             picCanvas.Invalidate();
