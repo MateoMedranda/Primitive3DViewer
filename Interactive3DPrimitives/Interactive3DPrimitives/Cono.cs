@@ -47,6 +47,7 @@ namespace Interactive3DPrimitives
         public int segmentos = 40;
         public float centroX, centroY;
         List<Vector3> puntos;
+        Vector3 centro;
         SolidBrush color = new SolidBrush(System.Drawing.Color.FromArgb(100,255,0,0));
         SolidBrush baseP = new SolidBrush(System.Drawing.Color.FromArgb(100, 0, 0, 255));
         public Cono()
@@ -93,6 +94,7 @@ namespace Interactive3DPrimitives
 
             }
             puntos.Add(new Vector3(0, altura, 0));
+            centro = puntos[0];
 
         }
 
@@ -102,6 +104,7 @@ namespace Interactive3DPrimitives
             {
                 puntos[i].setX(puntos[i].getX() + desplazamiento);
             }
+            centro = puntos[0];
         }
 
         public void MoverPuntosY(float desplazamiento)
@@ -110,6 +113,7 @@ namespace Interactive3DPrimitives
             {
                 puntos[i].setY(puntos[i].getY() + desplazamiento);
             }
+            centro = puntos[0];
         }
         public void MoverPuntosZ( float desplazamiento)
         {
@@ -117,14 +121,15 @@ namespace Interactive3DPrimitives
             {
                 puntos[i].setZ(puntos[i].getZ() + desplazamiento);
             }
+            centro = puntos[0];
         }
 
         public void DrawPoint(PictureBox Pcanvas,Graphics g)
         {    
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             
-
             Vector3 centroBase = puntos[0];
+            
             Vector3 vertice = puntos[puntos.Count - 1];
             PointF[] basePolygon = new PointF[segmentos];
                             
@@ -183,6 +188,7 @@ namespace Interactive3DPrimitives
                 p.Y = centro.Y + yRot;
                 p.Z = centro.Z + zRot;
             }
+            centro = puntos[0];
         }
         
 
@@ -205,6 +211,7 @@ namespace Interactive3DPrimitives
                 p.Y = centro.Y + y;
                 p.Z = centro.Z + zRot;
             }
+            centro = puntos[0];
         }
 
         public void RotarZ(float angulo)
@@ -226,6 +233,7 @@ namespace Interactive3DPrimitives
                 p.Y = centro.Y + yRot;
                 p.Z = centro.Z + z;
             }
+            centro = puntos[0];
         }
 
 
@@ -271,7 +279,16 @@ namespace Interactive3DPrimitives
                 p.Y = baseCentro.Y + hy + ry;
                 p.Z = baseCentro.Z + hz + rz;
             }
+            centro = puntos[0];
         }
 
+        public bool ComprobarCentro(PictureBox pCanvas)
+        {
+            if (centro.getX()+pCanvas.Width/2 < 0) return true;
+            if(centro.getY() + pCanvas.Height/2 < 0) return true;
+            if(centro.getX() + pCanvas.Width/2 > pCanvas.Width) return true;
+            if (centro.getY() + pCanvas.Height/2 > pCanvas.Height) return true;
+            return false;
+        }
     }
 }

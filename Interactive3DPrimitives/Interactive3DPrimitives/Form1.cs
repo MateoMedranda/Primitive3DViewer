@@ -246,6 +246,26 @@ namespace Interactive3DPrimitives
 
             if (conecreated)
             {
+                if (cone.ComprobarCentro(picCanvas))
+                {
+                    MessageBox.Show("No puedes mover la figura fuera de la pantalla");
+                    switch (mov)
+                    {
+                        case 1:
+                            cone.MoverPuntosY(-5);
+                            break;
+                        case 2:
+                            cone.MoverPuntosY(5);
+                            break;
+                        case 3:
+                            cone.MoverPuntosX(5);
+                            break;
+                        case 4:
+                            cone.MoverPuntosX(-5);
+                            break;
+                    }
+                    return true;
+                }
                 switch (mov)
                 {
                     case 1:
