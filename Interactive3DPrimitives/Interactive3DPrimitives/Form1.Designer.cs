@@ -37,7 +37,6 @@
             picColor = new PictureBox();
             btnFigureColor = new FontAwesome.Sharp.IconButton();
             lbMode = new Label();
-            trackBar1 = new TrackBar();
             label3 = new Label();
             btnRotate = new FontAwesome.Sharp.IconButton();
             iconButton2 = new FontAwesome.Sharp.IconButton();
@@ -54,7 +53,6 @@
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picColor).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picCanvas).BeginInit();
             panel4.SuspendLayout();
@@ -123,7 +121,6 @@
             panel3.Controls.Add(picColor);
             panel3.Controls.Add(btnFigureColor);
             panel3.Controls.Add(lbMode);
-            panel3.Controls.Add(trackBar1);
             panel3.Controls.Add(label3);
             panel3.Controls.Add(btnRotate);
             panel3.Controls.Add(iconButton2);
@@ -169,17 +166,6 @@
             lbMode.Size = new Size(97, 35);
             lbMode.TabIndex = 6;
             lbMode.Text = "Estático";
-            // 
-            // trackBar1
-            // 
-            trackBar1.Location = new Point(185, 16);
-            trackBar1.Margin = new Padding(3, 4, 3, 4);
-            trackBar1.Minimum = 1;
-            trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(328, 56);
-            trackBar1.TabIndex = 2;
-            trackBar1.Value = 1;
-            trackBar1.Scroll += trackBar1_Scroll;
             // 
             // label3
             // 
@@ -375,12 +361,12 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picColor).EndInit();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picCanvas).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ResumeLayout(false);
+
         }
 
         #endregion
@@ -400,7 +386,6 @@
         private Label label2;
         private FontAwesome.Sharp.IconButton btnRotate;
         private FontAwesome.Sharp.IconButton iconButton2;
-        private TrackBar trackBar1;
         private Label label3;
         private Label lbMode;
         private Label label5;

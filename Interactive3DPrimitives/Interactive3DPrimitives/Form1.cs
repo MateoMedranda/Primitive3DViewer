@@ -18,14 +18,15 @@ namespace Interactive3DPrimitives
         Color color;
         Cono cone = new Cono();
         bool conecreated = false;
+        float mousScrollValue = 1;
         float alt, rad, valInicial = 1;
 
         public Form1()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-
             picCanvas.Paint += picCanvas_Paint;
+            this.MouseWheel += Form1_MouseWheel;
         }
 
         private void picCanvas_Paint(object sender, PaintEventArgs e)
@@ -168,18 +169,34 @@ namespace Interactive3DPrimitives
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            if (!conecreated&&!drawCube)
+            
+        }
+
+        private void Form1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (!conecreated && !drawCube)
             {
                 MessageBox.Show("No puedes manipular la figura sin generarla");
                 return;
             }
 
-            if (conecreated) {
-                float factor = 5/10 + trackBar1.Value / valInicial;
+            if(mousScrollValue==1&& e.Delta <0) {
+                MessageBox.Show("No puedes achicar mas la figura");
+                return;
+            }
+            if (e.Delta > 0)
+                mousScrollValue++;
+            else
+                mousScrollValue--;
+
+            if (conecreated)
+            {
+                float factor = 5 / 10 + mousScrollValue / valInicial;
                 cone.EscalarCono(factor, factor);
-                valInicial = trackBar1.Value;
+                valInicial = mousScrollValue;
             }
             picCanvas.Invalidate();
+
         }
     }
 }
