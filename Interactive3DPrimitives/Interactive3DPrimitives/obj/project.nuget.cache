@@ -1,10 +1,18 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "VP0bgDYBUt8=",
   "success": true,
   "projectFilePath": "C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gmlop\\.nuget\\packages\\fontawesome.sharp\\6.6.0\\fontawesome.sharp.6.6.0.nupkg.sha512"
+=======
+  "dgSpecHash": "nsgoQrm/wvQ=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mateo\\Desktop\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mateo\\.nuget\\packages\\fontawesome.sharp\\6.6.0\\fontawesome.sharp.6.6.0.nupkg.sha512"
+>>>>>>> 0bff2cc7deedc2192560a054ea5ef353d742ba63
   ],
   "logs": []
 }
