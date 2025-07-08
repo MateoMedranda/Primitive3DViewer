@@ -14,11 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Interactive3DPrimitives")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba2bacabf766b04035c290ccf9dd5fa53d26001b")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ff70e89ed7791c841a77ea445cba7454b0224179")]
->>>>>>> 0bff2cc7deedc2192560a054ea5ef353d742ba63
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7803196c9114baf82f5e103f58ad0afc16223695")]
 [assembly: System.Reflection.AssemblyProductAttribute("Interactive3DPrimitives")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Interactive3DPrimitives")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

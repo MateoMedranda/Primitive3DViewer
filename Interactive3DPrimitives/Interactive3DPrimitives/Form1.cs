@@ -208,7 +208,7 @@ namespace Interactive3DPrimitives
         {
             if (e.Button == MouseButtons.Left)
             {
-                if(holding && conecreated)
+                if(holding && conecreated && rotateOn)
                     continuarRotacion(lastdx, lastdy);
                 holding = false;
                 
