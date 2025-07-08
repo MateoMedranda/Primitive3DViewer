@@ -17,20 +17,23 @@ namespace Interactive3DPrimitives
         private float angleX = 0f;
         private float angleY = 0f;
         private Graphics mgraph;
-        private Color colorCube;
+        private Color colorSphere;
         private List<float[]> sphereVertex = new List<float[]>();
+        private const float distancePoints = 0.12f;
 
-        public Sphere(){
-        
+
+        public Sphere()
+        {
+
         }
 
         public void genetateSphere()
         {
             radius = 100;
             sphereVertex.Clear();
-            for(float theta=0; theta<=2*Math.PI; theta = theta + 0.2f)
+            for (float theta = 0; theta <= 2 * Math.PI; theta = theta + distancePoints)
             {
-                for (float phi = 0; phi <= 2*Math.PI; phi = phi + 0.2f)
+                for (float phi = 0; phi <= Math.PI; phi = phi + distancePoints)
                 {
                     float x = radius * (float)Math.Sin(phi) * (float)Math.Cos(theta);
                     float y = radius * (float)Math.Sin(phi) * (float)Math.Sin(theta);
@@ -59,7 +62,7 @@ namespace Interactive3DPrimitives
             canvasWidth = camWidth;
             canvasHeight = camHeight;
             mgraph = g;
-            colorCube = color;
+            colorSphere = color;
             d = nd;
         }
 
@@ -84,8 +87,13 @@ namespace Interactive3DPrimitives
 
         public void drawSphere()
         {
-            Pen mpen = new Pen(Color.Black, 2);
-            Point point = new Point();
+            int nTheta = (int)(2 * Math.PI / distancePoints) + 1;
+            int nPhi = (int)(Math.PI / distancePoints) + 1;
+            List<int> index = new List<int>();
+
+            Pen mpen = new Pen(Color.Black, 1);
+            Point[] points2D = new Point[sphereVertex.Count];
+
             for (int i = 0; i < sphereVertex.Count; i++)
             {
                 float x = sphereVertex[i][0];
@@ -93,11 +101,40 @@ namespace Interactive3DPrimitives
                 float z = sphereVertex[i][2];
 
                 Rotate(ref x, ref y, ref z);
-                point = proyectPoint(x, y, z);
+                if (z > 20)
+                {
+                    index.Add(i);
+                }
+                points2D[i] = proyectPoint(x, y, z);
 
-                mgraph.DrawRectangle(mpen, point.X, point.Y, 2, 2);
             }
-        }
+            for (int t = 0; t < nTheta - 1; t++)
+            {
+                for (int p = 0; p < nPhi - 1; p++)
+                {
+                    int index1 = t * nPhi + p;
+                    int index2 = index1 + 1;
+                    int index3 = index1 + nPhi + 1;
+                    int index4 = index1 + nPhi;
 
+                    if (index.Contains(index2) || index.Contains(index1) || index.Contains(index3) || index.Contains(index4))
+                    {
+                        continue;
+                    }
+
+                    Point[] polygon = new Point[]
+                    {
+                        points2D[index1],
+                        points2D[index2],
+                        points2D[index3],
+                        points2D[index4]
+                    };
+                    Brush mbrush = new SolidBrush(colorSphere);
+                    mgraph.FillPolygon(mbrush, polygon);
+                    mgraph.DrawPolygon(mpen, polygon);
+                }
+            }
+
+        }
     }
 }

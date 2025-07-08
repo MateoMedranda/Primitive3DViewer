@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "CBYgFeGaPr8=",
+  "dgSpecHash": "nsgoQrm/wvQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\rouss\\Source\\Repos\\Primitive3DViewerCopia\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
+  "projectFilePath": "C:\\Users\\Mateo\\Desktop\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\rouss\\.nuget\\packages\\fontawesome.sharp\\6.6.0\\fontawesome.sharp.6.6.0.nupkg.sha512"
+    "C:\\Users\\Mateo\\.nuget\\packages\\fontawesome.sharp\\6.6.0\\fontawesome.sharp.6.6.0.nupkg.sha512"
   ],
   "logs": []
 }
