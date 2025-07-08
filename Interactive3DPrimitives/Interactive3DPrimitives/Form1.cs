@@ -93,6 +93,7 @@ namespace Interactive3DPrimitives
                 drawCube = true;
                 conecreated = false;
                 drawSphere = false;
+                drawCylinder = false;
                 lbFigure.Text = "Cubo";
             }
             picCanvas.Invalidate();
@@ -184,6 +185,7 @@ namespace Interactive3DPrimitives
                 color = Color.FromArgb(128, figureColor.Color);
                 picCanvas.Invalidate();
             }
+                cilinder.getColor(color);
         }
 
         private void btnCone_Click(object sender, EventArgs e)
@@ -193,6 +195,7 @@ namespace Interactive3DPrimitives
                 conecreated = true;
                 drawCube = false;
                 drawSphere = false;
+                drawCylinder = false;
                 lbFigure.Text = "Cono";
             }
             picCanvas.Invalidate();
@@ -237,6 +240,7 @@ namespace Interactive3DPrimitives
                 drawSphere = true;
                 drawCube = false;
                 conecreated = false;
+                drawCylinder=false;
                 lbFigure.Text = "Esfera";
             }
             picCanvas.Invalidate();
@@ -316,7 +320,7 @@ namespace Interactive3DPrimitives
                 conecreated = false;
                 lbFigure.Text = "Cilindro";
             }
-            cilinder.setCenter(picCanvas.Width/2, picCanvas.Height/2);
+            cilinder.setCenter(picCanvas.Width / 2, picCanvas.Height / 2);
             cilinder.generateCylinder();
             picCanvas.Invalidate();
         }
