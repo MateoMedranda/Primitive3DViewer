@@ -185,6 +185,7 @@ namespace Interactive3DPrimitives
                 color = Color.FromArgb(128, figureColor.Color);
                 picCanvas.Invalidate();
             }
+                cilinder.getColor(color);
         }
 
         private void btnCone_Click(object sender, EventArgs e)
@@ -299,7 +300,7 @@ namespace Interactive3DPrimitives
                 conecreated = false;
                 lbFigure.Text = "Cilindro";
             }
-            cilinder.setCenter(picCanvas.Width/2, picCanvas.Height/2);
+            cilinder.setCenter(picCanvas.Width / 2, picCanvas.Height / 2);
             cilinder.generateCylinder();
             picCanvas.Invalidate();
         }

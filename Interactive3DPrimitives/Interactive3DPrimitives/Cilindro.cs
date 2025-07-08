@@ -14,9 +14,9 @@ namespace Interactive3DPrimitives
         private int alturaCilindro;
         private List<Vector3> baseInferior;
         private List<Vector3> baseSuperior;
-        private List<Vector3> puntos;
         private int screenCenterX;
         private int screenCenterY;
+        private Color shapeColor;
         private int segmentosVerticales;
 
         public Cilindro()
@@ -29,6 +29,10 @@ namespace Interactive3DPrimitives
         {
             screenCenterX = centerX;
             screenCenterY = centerY;
+        }
+        public void getColor(Color newColor)
+        {
+            shapeColor = newColor;
         }
         public void generateCylinder()
         {
@@ -51,22 +55,31 @@ namespace Interactive3DPrimitives
 
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             Pen cPen = new Pen(Color.Black, 2);
-            Vector3 centroBaseI = baseInferior[0];
-
+            List<PointF> caraInferior = new List<PointF>();
+            List<PointF> caraSuperior = new List<PointF>();
+            //Dibujar base inferior
             for (int i = 1; i < segmentosVerticales + 1; i++)
             {
                 Vector3 actual = baseInferior[i];
                 Vector3 siguiente = baseInferior[i + 1];
-                g.DrawLine(cPen, new PointF(actual.X + screenCenterX, -actual.Y + screenCenterY),
-               new PointF(siguiente.X + screenCenterX, -siguiente.Y + screenCenterY));
+                PointF actualRelativo = new PointF(actual.X + screenCenterX, -actual.Y + screenCenterY);
+                PointF siguienteRelativo = new PointF(siguiente.X + screenCenterX, -siguiente.Y + screenCenterY);
+                g.DrawLine(cPen, actualRelativo,siguienteRelativo);
+                caraInferior.Add(actualRelativo);
+                caraInferior.Add(siguienteRelativo);
             }
+            //Dibujar base superior
             for (int i = 1; i < segmentosVerticales + 1; i++)
             {
                 Vector3 actual = baseSuperior[i];
                 Vector3 siguiente = baseSuperior[i + 1];
-                g.DrawLine(cPen, new PointF(actual.X + screenCenterX, -actual.Y + screenCenterY),
-               new PointF(siguiente.X + screenCenterX, -siguiente.Y + screenCenterY));
+                PointF actualRelativo = new PointF(actual.X + screenCenterX, -actual.Y + screenCenterY);
+                PointF siguienteRelativo = new PointF(siguiente.X + screenCenterX, -siguiente.Y + screenCenterY);
+                g.DrawLine(cPen, actualRelativo, siguienteRelativo);
+                caraSuperior.Add(actualRelativo);
+                caraSuperior.Add(siguienteRelativo);
             }
+            //Dibujar líneas verticales
             for (int i = 1; i < segmentosVerticales; i+=(segmentosVerticales/12))
             {
                 Vector3 superior = baseSuperior[i];
@@ -74,6 +87,25 @@ namespace Interactive3DPrimitives
                 g.DrawLine(cPen, new PointF(inferior.X + screenCenterX, -inferior.Y + screenCenterY),
                new PointF(superior.X + screenCenterX, -superior.Y + screenCenterY));
             }
+            //Colorear los lados
+            SolidBrush mBrush=new SolidBrush(shapeColor);
+            for(int i = 1;i < segmentosVerticales + 1;i++)
+            {
+                Vector3 superior = baseSuperior[i];
+                Vector3 inferior = baseInferior[i];
+                Vector3 superiorNext = baseSuperior[i+1];
+                Vector3 inferiorNext = baseInferior[i+1];
+                PointF[] polygon = [
+                    new PointF(inferior.X + screenCenterX, -inferior.Y + screenCenterY),
+                    new PointF(inferiorNext.X + screenCenterX, -inferiorNext.Y + screenCenterY), 
+                    new PointF(superiorNext.X + screenCenterX, -superiorNext.Y + screenCenterY),
+                    new PointF(superior.X + screenCenterX, -superior.Y + screenCenterY)
+                   ];
+                g.FillPolygon(mBrush, polygon);
+            }
+            //Colorear las bases
+            g.FillPolygon(mBrush, caraInferior.ToArray());
+            g.FillPolygon(mBrush, caraSuperior.ToArray());
         }
         public void RotarX(float angulo)
         {
