@@ -34,8 +34,7 @@
             label1 = new Label();
             panel2 = new Panel();
             panel3 = new Panel();
-            iconButton1 = new FontAwesome.Sharp.IconButton();
-            txtfocusMov = new TextBox();
+            FusionButton = new FontAwesome.Sharp.IconButton();
             picColor = new PictureBox();
             btnFigureColor = new FontAwesome.Sharp.IconButton();
             lbMode = new Label();
@@ -88,11 +87,11 @@
             lbFigure.AutoSize = true;
             lbFigure.Font = new Font("Segoe UI", 15F, FontStyle.Italic);
             lbFigure.ForeColor = SystemColors.Control;
-            lbFigure.Location = new Point(113, 65);
+            lbFigure.Location = new Point(130, 68);
             lbFigure.Name = "lbFigure";
-            lbFigure.Size = new Size(59, 35);
+            lbFigure.Size = new Size(144, 35);
             lbFigure.TabIndex = 7;
-            lbFigure.Text = "- - -";
+            lbFigure.Text = "- - - - - - - -";
             // 
             // label1
             // 
@@ -120,8 +119,7 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(iconButton1);
-            panel3.Controls.Add(txtfocusMov);
+            panel3.Controls.Add(FusionButton);
             panel3.Controls.Add(picColor);
             panel3.Controls.Add(btnFigureColor);
             panel3.Controls.Add(lbMode);
@@ -135,32 +133,24 @@
             panel3.Size = new Size(1217, 84);
             panel3.TabIndex = 1;
             // 
-            // iconButton1
+            // FusionButton
             // 
-            iconButton1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            iconButton1.Cursor = Cursors.Hand;
-            iconButton1.Font = new Font("Segoe UI", 12F);
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.ObjectUngroup;
-            iconButton1.IconColor = Color.FromArgb(64, 64, 0);
-            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton1.IconSize = 40;
-            iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(945, 12);
-            iconButton1.Margin = new Padding(3, 4, 3, 4);
-            iconButton1.Name = "iconButton1";
-            iconButton1.Size = new Size(248, 57);
-            iconButton1.TabIndex = 5;
-            iconButton1.Text = "Fusionar Figuras";
-            iconButton1.UseVisualStyleBackColor = true;
-            // 
-            // txtfocusMov
-            // 
-            txtfocusMov.BackColor = SystemColors.WindowFrame;
-            txtfocusMov.ForeColor = SystemColors.WindowFrame;
-            txtfocusMov.Location = new Point(248, 27);
-            txtfocusMov.Name = "txtfocusMov";
-            txtfocusMov.Size = new Size(10, 27);
-            txtfocusMov.TabIndex = 8;
+            FusionButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            FusionButton.Cursor = Cursors.Hand;
+            FusionButton.Font = new Font("Segoe UI", 12F);
+            FusionButton.IconChar = FontAwesome.Sharp.IconChar.ObjectUngroup;
+            FusionButton.IconColor = Color.FromArgb(64, 64, 0);
+            FusionButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            FusionButton.IconSize = 40;
+            FusionButton.ImageAlign = ContentAlignment.MiddleLeft;
+            FusionButton.Location = new Point(966, 10);
+            FusionButton.Margin = new Padding(3, 4, 3, 4);
+            FusionButton.Name = "FusionButton";
+            FusionButton.Size = new Size(248, 57);
+            FusionButton.TabIndex = 5;
+            FusionButton.Text = "Fusionar Figuras";
+            FusionButton.UseVisualStyleBackColor = true;
+            FusionButton.Click += iconButton1_Click;
             // 
             // picColor
             // 
@@ -426,7 +416,6 @@
         private FontAwesome.Sharp.IconButton btnFigureColor;
         private ColorDialog figureColor;
         private PictureBox picColor;
-        private TextBox txtfocusMov;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton FusionButton;
     }
 }

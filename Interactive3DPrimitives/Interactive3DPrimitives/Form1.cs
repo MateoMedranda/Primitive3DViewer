@@ -15,6 +15,8 @@ namespace Interactive3DPrimitives
         private bool drawCylinder = false;
         private bool holding = false;
         private bool rotateOn = false;
+        private bool fusion = false;
+        int cont = 0, lastdx,lastdy;
         private Point previusMouse;
         float angleX = 0f;
         float angleY = 0f;
@@ -88,7 +90,22 @@ namespace Interactive3DPrimitives
 
         private void btnCube_Click(object sender, EventArgs e)
         {
-            if (!drawCube)
+            lbFigure.Text = "";
+            if (fusion)
+            {
+                if (cont <= 1 && !drawCube)
+                {
+                    cont++;
+                    drawCube = true;
+                    lbFigure.Text += "Cubo ";
+                }
+                if (cont == 2)
+                {
+                    fusion = false;
+                    cont = 0;
+                }
+            }
+            else if (!drawCube)
             {
                 drawCube = true;
                 conecreated = false;
@@ -113,15 +130,16 @@ namespace Interactive3DPrimitives
             }
         }
 
-        private void picCanvas_MouseMove(object sender, MouseEventArgs e)
+        private async void picCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (holding)
             {
                 int dx = e.X - previusMouse.X;
                 int dy = -(e.Y - previusMouse.Y);
-
+                lastdx = dx;
+                lastdy = dy;
                 picCanvas.Invalidate();
-                if (rotateOn && drawCube)
+                if (rotateOn && !drawCube)
                 {
                     angleY += dx * 0.01f;
                     angleX += dy * 0.01f;
@@ -135,6 +153,7 @@ namespace Interactive3DPrimitives
                     cone.RotarX(dy);
 
                     previusMouse = e.Location;
+                    
                 }
                 if (rotateOn && drawSphere)
                 {
@@ -150,14 +169,51 @@ namespace Interactive3DPrimitives
                 }
                 picCanvas.Invalidate();
             }
+
+
         }
 
-        private void picCanvas_MouseUp(object sender, MouseEventArgs e)
+        public async void continuarRotacion(int dx, int dy)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                if (conecreated)
+                {
+                    cone.RotarY(dx);
+                    cone.RotarX(dy);
+                }
+                picCanvas.Invalidate();
+
+                dx = (int)(dx * 1.01);
+                dy = (int)(dy * 1.01);
+
+                await Task.Delay(10);
+            }
+            for (int i = 0; i < 50; i++)
+            {
+                if (conecreated)
+                {
+                    cone.RotarY(dx);
+                    cone.RotarX(dy);
+                }
+                picCanvas.Invalidate();
+
+                dx = (int)(dx * 0.95);
+                dy = (int)(dy * 0.95);
+
+                await Task.Delay(10);
+            }
+        }
+        private async void picCanvas_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
+                if(holding && conecreated)
+                    continuarRotacion(lastdx, lastdy);
                 holding = false;
+                
             }
+
         }
 
         private void btnRotate_Click(object sender, EventArgs e)
@@ -185,12 +241,27 @@ namespace Interactive3DPrimitives
                 color = Color.FromArgb(128, figureColor.Color);
                 picCanvas.Invalidate();
             }
-                cilinder.getColor(color);
+            cilinder.getColor(color);
         }
 
         private void btnCone_Click(object sender, EventArgs e)
         {
-            if (!conecreated)
+            lbFigure.Text = "";
+            if (fusion)
+            {
+                if (cont <= 1 && !conecreated)
+                {
+                    cont++;
+                    conecreated = true;
+                    lbFigure.Text += "Cono ";
+                }
+                if (cont == 2)
+                {
+                    fusion = false;
+                    cont = 0;
+                }
+            }
+            else if(!conecreated)
             {
                 conecreated = true;
                 drawCube = false;
@@ -235,12 +306,27 @@ namespace Interactive3DPrimitives
 
         private void btnSphere_Click(object sender, EventArgs e)
         {
-            if (!drawSphere)
+            lbFigure.Text = "";
+            if (fusion)
+            {
+                if (cont <= 1 && !drawSphere)
+                {
+                    cont++;
+                    drawSphere = true;
+                    lbFigure.Text += "Esfera ";
+                }
+                if (cont == 2)
+                {
+                    fusion = false;
+                    cont = 0;
+                }
+            }
+            else if(!drawSphere)
             {
                 drawSphere = true;
                 drawCube = false;
                 conecreated = false;
-                drawCylinder=false;
+                drawCylinder = false;
                 lbFigure.Text = "Esfera";
             }
             picCanvas.Invalidate();
@@ -312,7 +398,22 @@ namespace Interactive3DPrimitives
 
         private void btnCilinder_Click(object sender, EventArgs e)
         {
-            if (!drawCylinder)
+            lbFigure.Text = "";
+            if (fusion)
+            {
+                if(cont <= 1 && !drawCylinder)
+                {
+                    cont++;
+                    drawCylinder = true;
+                    lbFigure.Text += "Cilindro ";
+                }
+                
+                if(cont==2)
+                {
+                    fusion = false;
+                    cont = 0;
+                }
+            } else if (!drawCylinder)
             {
                 drawCylinder = true;
                 drawSphere = false;
@@ -323,6 +424,15 @@ namespace Interactive3DPrimitives
             cilinder.setCenter(picCanvas.Width / 2, picCanvas.Height / 2);
             cilinder.generateCylinder();
             picCanvas.Invalidate();
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            fusion = !fusion;
+            drawCylinder = false;
+            drawSphere = false;
+            drawCube = false;
+            conecreated = false;
         }
     }
 }

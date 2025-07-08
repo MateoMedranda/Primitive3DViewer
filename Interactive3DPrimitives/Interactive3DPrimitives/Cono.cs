@@ -60,11 +60,12 @@ namespace Interactive3DPrimitives
             baseP?.Dispose();
 
             color = new SolidBrush(colorSelected);
+            int r= 255 - colorSelected.R, g= 100 - colorSelected.G, b= 255 - colorSelected.B;
+            if (r < 0) r = 0;
+            if (g < 0) g=0;
+            if (b < 0) b = 0;
             System.Drawing.Color inverso = (System.Drawing.Color.FromArgb(
-                colorSelected.A,                   
-                255 - colorSelected.R,
-                100 - colorSelected.G,
-                255 - colorSelected.B
+                colorSelected.A,r,g,b
             ));
             baseP = new SolidBrush(inverso);
         }
