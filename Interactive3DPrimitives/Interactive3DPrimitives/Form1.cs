@@ -182,6 +182,24 @@ namespace Interactive3DPrimitives
                     cone.RotarY(dx);
                     cone.RotarX(dy);
                 }
+                if (drawCube && i % 2 == 0)
+                {
+                    angleY += dx * 0.01f;
+                    angleX += dy * 0.01f;
+                }
+
+                
+                if (drawSphere)
+                {
+                    angleY += dx * 0.01f;
+                    angleX += dy * 0.01f;
+                }
+                if (drawCylinder)
+                {
+                    cilinder.RotarY(dx);
+                    cilinder.RotarX(dy);
+                }
+
                 picCanvas.Invalidate();
 
                 dx = (int)(dx * 1.01);
@@ -196,6 +214,22 @@ namespace Interactive3DPrimitives
                     cone.RotarY(dx);
                     cone.RotarX(dy);
                 }
+                if (drawCube && i%2==0)
+                {
+                    angleY += dx * 0.01f;
+                    angleX += dy * 0.01f;
+                }
+
+                if (drawSphere)
+                {
+                    angleY += dx * 0.01f;
+                    angleX += dy * 0.01f;
+                }
+                if (drawCylinder)
+                {
+                    cilinder.RotarY(dx);
+                    cilinder.RotarX(dy);
+                }
                 picCanvas.Invalidate();
 
                 dx = (int)(dx * 0.95);
@@ -208,7 +242,7 @@ namespace Interactive3DPrimitives
         {
             if (e.Button == MouseButtons.Left)
             {
-                if(holding && conecreated && rotateOn)
+                if(holding &&rotateOn)
                     continuarRotacion(lastdx, lastdy);
                 holding = false;
                 
