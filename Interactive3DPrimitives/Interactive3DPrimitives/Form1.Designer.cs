@@ -34,13 +34,14 @@
             label1 = new Label();
             panel2 = new Panel();
             panel3 = new Panel();
+            btnScale = new FontAwesome.Sharp.IconButton();
             FusionButton = new FontAwesome.Sharp.IconButton();
             picColor = new PictureBox();
             btnFigureColor = new FontAwesome.Sharp.IconButton();
             lbMode = new Label();
             label3 = new Label();
             btnRotate = new FontAwesome.Sharp.IconButton();
-            iconButton2 = new FontAwesome.Sharp.IconButton();
+            btnTraslate = new FontAwesome.Sharp.IconButton();
             tableLayoutPanel1 = new TableLayoutPanel();
             picCanvas = new PictureBox();
             panel4 = new Panel();
@@ -66,9 +67,8 @@
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1239, 107);
+            panel1.Size = new Size(1084, 80);
             panel1.TabIndex = 0;
             // 
             // label5
@@ -76,9 +76,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 15F, FontStyle.Bold | FontStyle.Italic);
             label5.ForeColor = SystemColors.Control;
-            label5.Location = new Point(19, 65);
+            label5.Location = new Point(17, 49);
             label5.Name = "label5";
-            label5.Size = new Size(105, 35);
+            label5.Size = new Size(83, 28);
             label5.TabIndex = 7;
             label5.Text = "Figura: ";
             // 
@@ -87,9 +87,9 @@
             lbFigure.AutoSize = true;
             lbFigure.Font = new Font("Segoe UI", 15F, FontStyle.Italic);
             lbFigure.ForeColor = SystemColors.Control;
-            lbFigure.Location = new Point(130, 68);
+            lbFigure.Location = new Point(114, 51);
             lbFigure.Name = "lbFigure";
-            lbFigure.Size = new Size(144, 35);
+            lbFigure.Size = new Size(118, 28);
             lbFigure.TabIndex = 7;
             lbFigure.Text = "- - - - - - - -";
             // 
@@ -99,9 +99,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Yu Gothic", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ButtonFace;
-            label1.Location = new Point(478, 12);
+            label1.Location = new Point(418, 9);
             label1.Name = "label1";
-            label1.Size = new Size(346, 44);
+            label1.Size = new Size(279, 35);
             label1.TabIndex = 0;
             label1.Text = "Primitive 3D Viewer";
             // 
@@ -110,28 +110,41 @@
             panel2.Controls.Add(panel3);
             panel2.Controls.Add(tableLayoutPanel1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 107);
-            panel2.Margin = new Padding(3, 4, 3, 4);
+            panel2.Location = new Point(0, 80);
             panel2.Name = "panel2";
-            panel2.Padding = new Padding(11, 13, 11, 13);
-            panel2.Size = new Size(1239, 642);
+            panel2.Padding = new Padding(10);
+            panel2.Size = new Size(1084, 482);
             panel2.TabIndex = 1;
             // 
             // panel3
             // 
+            panel3.Controls.Add(btnScale);
             panel3.Controls.Add(FusionButton);
             panel3.Controls.Add(picColor);
             panel3.Controls.Add(btnFigureColor);
             panel3.Controls.Add(lbMode);
             panel3.Controls.Add(label3);
             panel3.Controls.Add(btnRotate);
-            panel3.Controls.Add(iconButton2);
+            panel3.Controls.Add(btnTraslate);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(11, 545);
-            panel3.Margin = new Padding(3, 4, 3, 4);
+            panel3.Location = new Point(10, 409);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1217, 84);
+            panel3.Size = new Size(1064, 63);
             panel3.TabIndex = 1;
+            // 
+            // btnScale
+            // 
+            btnScale.Cursor = Cursors.Hand;
+            btnScale.IconChar = FontAwesome.Sharp.IconChar.Expand;
+            btnScale.IconColor = Color.Black;
+            btnScale.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnScale.IconSize = 30;
+            btnScale.Location = new Point(151, 12);
+            btnScale.Name = "btnScale";
+            btnScale.Size = new Size(56, 37);
+            btnScale.TabIndex = 9;
+            btnScale.UseVisualStyleBackColor = true;
+            btnScale.Click += btnScale_Click;
             // 
             // FusionButton
             // 
@@ -143,10 +156,9 @@
             FusionButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             FusionButton.IconSize = 40;
             FusionButton.ImageAlign = ContentAlignment.MiddleLeft;
-            FusionButton.Location = new Point(966, 10);
-            FusionButton.Margin = new Padding(3, 4, 3, 4);
+            FusionButton.Location = new Point(844, 8);
             FusionButton.Name = "FusionButton";
-            FusionButton.Size = new Size(248, 57);
+            FusionButton.Size = new Size(217, 43);
             FusionButton.TabIndex = 5;
             FusionButton.Text = "Fusionar Figuras";
             FusionButton.UseVisualStyleBackColor = true;
@@ -155,11 +167,10 @@
             // picColor
             // 
             picColor.BackColor = Color.Transparent;
-            picColor.BorderStyle = BorderStyle.FixedSingle;
-            picColor.Location = new Point(597, 12);
-            picColor.Margin = new Padding(3, 4, 3, 4);
+            picColor.BorderStyle = BorderStyle.Fixed3D;
+            picColor.Location = new Point(338, 8);
             picColor.Name = "picColor";
-            picColor.Size = new Size(19, 55);
+            picColor.Size = new Size(17, 40);
             picColor.TabIndex = 8;
             picColor.TabStop = false;
             // 
@@ -169,10 +180,9 @@
             btnFigureColor.IconColor = Color.Black;
             btnFigureColor.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnFigureColor.IconSize = 32;
-            btnFigureColor.Location = new Point(539, 12);
-            btnFigureColor.Margin = new Padding(3, 4, 3, 4);
+            btnFigureColor.Location = new Point(288, 7);
             btnFigureColor.Name = "btnFigureColor";
-            btnFigureColor.Size = new Size(50, 56);
+            btnFigureColor.Size = new Size(44, 42);
             btnFigureColor.TabIndex = 7;
             btnFigureColor.UseVisualStyleBackColor = true;
             btnFigureColor.Click += btnFigureColor_Click;
@@ -182,9 +192,9 @@
             lbMode.AutoSize = true;
             lbMode.Font = new Font("Segoe UI", 15F, FontStyle.Italic);
             lbMode.ForeColor = SystemColors.Control;
-            lbMode.Location = new Point(736, 16);
+            lbMode.Location = new Point(475, 13);
             lbMode.Name = "lbMode";
-            lbMode.Size = new Size(97, 35);
+            lbMode.Size = new Size(78, 28);
             lbMode.TabIndex = 6;
             lbMode.Text = "Estático";
             // 
@@ -193,9 +203,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 15F, FontStyle.Bold | FontStyle.Italic);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(642, 16);
+            label3.Location = new Point(393, 13);
             label3.Name = "label3";
-            label3.Size = new Size(94, 35);
+            label3.Size = new Size(76, 28);
             label3.TabIndex = 5;
             label3.Text = "Modo: ";
             // 
@@ -206,27 +216,26 @@
             btnRotate.IconColor = Color.Black;
             btnRotate.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnRotate.IconSize = 30;
-            btnRotate.Location = new Point(90, 16);
-            btnRotate.Margin = new Padding(3, 4, 3, 4);
+            btnRotate.Location = new Point(79, 12);
             btnRotate.Name = "btnRotate";
-            btnRotate.Size = new Size(64, 49);
+            btnRotate.Size = new Size(56, 37);
             btnRotate.TabIndex = 1;
             btnRotate.UseVisualStyleBackColor = true;
             btnRotate.Click += btnRotate_Click;
             // 
-            // iconButton2
+            // btnTraslate
             // 
-            iconButton2.Cursor = Cursors.Hand;
-            iconButton2.IconChar = FontAwesome.Sharp.IconChar.UpDownLeftRight;
-            iconButton2.IconColor = Color.Black;
-            iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton2.IconSize = 30;
-            iconButton2.Location = new Point(8, 16);
-            iconButton2.Margin = new Padding(3, 4, 3, 4);
-            iconButton2.Name = "iconButton2";
-            iconButton2.Size = new Size(64, 49);
-            iconButton2.TabIndex = 0;
-            iconButton2.UseVisualStyleBackColor = true;
+            btnTraslate.Cursor = Cursors.Hand;
+            btnTraslate.IconChar = FontAwesome.Sharp.IconChar.UpDownLeftRight;
+            btnTraslate.IconColor = Color.Black;
+            btnTraslate.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnTraslate.IconSize = 30;
+            btnTraslate.Location = new Point(7, 12);
+            btnTraslate.Name = "btnTraslate";
+            btnTraslate.Size = new Size(56, 37);
+            btnTraslate.TabIndex = 0;
+            btnTraslate.UseVisualStyleBackColor = true;
+            btnTraslate.Click += btnTraslate_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -237,26 +246,24 @@
             tableLayoutPanel1.Controls.Add(picCanvas, 0, 0);
             tableLayoutPanel1.Controls.Add(panel4, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(11, 13);
-            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
+            tableLayoutPanel1.Location = new Point(10, 10);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
-            tableLayoutPanel1.Size = new Size(1217, 616);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.Size = new Size(1064, 462);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // picCanvas
             // 
             picCanvas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             picCanvas.BorderStyle = BorderStyle.Fixed3D;
-            picCanvas.Location = new Point(3, 4);
-            picCanvas.Margin = new Padding(3, 4, 3, 4);
+            picCanvas.Location = new Point(3, 3);
             picCanvas.Name = "picCanvas";
-            picCanvas.Size = new Size(967, 608);
+            picCanvas.Size = new Size(845, 456);
             picCanvas.TabIndex = 0;
             picCanvas.TabStop = false;
             picCanvas.SizeChanged += picCanvas_SizeChanged;
@@ -272,10 +279,9 @@
             panel4.Controls.Add(btnSphere);
             panel4.Controls.Add(btnCube);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(976, 4);
-            panel4.Margin = new Padding(3, 4, 3, 4);
+            panel4.Location = new Point(854, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(238, 608);
+            panel4.Size = new Size(207, 456);
             panel4.TabIndex = 1;
             // 
             // label2
@@ -284,9 +290,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             label2.ForeColor = Color.FromArgb(255, 192, 128);
-            label2.Location = new Point(37, 21);
+            label2.Location = new Point(31, 16);
             label2.Name = "label2";
-            label2.Size = new Size(137, 46);
+            label2.Size = new Size(110, 37);
             label2.TabIndex = 4;
             label2.Text = "Figuras";
             // 
@@ -300,10 +306,9 @@
             btnCone.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCone.IconSize = 40;
             btnCone.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCone.Location = new Point(15, 372);
-            btnCone.Margin = new Padding(3, 4, 3, 4);
+            btnCone.Location = new Point(13, 279);
             btnCone.Name = "btnCone";
-            btnCone.Size = new Size(202, 57);
+            btnCone.Size = new Size(176, 43);
             btnCone.TabIndex = 3;
             btnCone.Text = "Cono";
             btnCone.UseVisualStyleBackColor = true;
@@ -319,10 +324,9 @@
             btnCilinder.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCilinder.IconSize = 40;
             btnCilinder.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCilinder.Location = new Point(15, 277);
-            btnCilinder.Margin = new Padding(3, 4, 3, 4);
+            btnCilinder.Location = new Point(13, 208);
             btnCilinder.Name = "btnCilinder";
-            btnCilinder.Size = new Size(202, 57);
+            btnCilinder.Size = new Size(176, 43);
             btnCilinder.TabIndex = 2;
             btnCilinder.Text = "Cilindro";
             btnCilinder.UseVisualStyleBackColor = true;
@@ -338,10 +342,9 @@
             btnSphere.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSphere.IconSize = 40;
             btnSphere.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSphere.Location = new Point(15, 192);
-            btnSphere.Margin = new Padding(3, 4, 3, 4);
+            btnSphere.Location = new Point(13, 144);
             btnSphere.Name = "btnSphere";
-            btnSphere.Size = new Size(202, 57);
+            btnSphere.Size = new Size(176, 43);
             btnSphere.TabIndex = 1;
             btnSphere.Text = "Esfera";
             btnSphere.UseVisualStyleBackColor = true;
@@ -357,10 +360,9 @@
             btnCube.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCube.IconSize = 40;
             btnCube.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCube.Location = new Point(15, 104);
-            btnCube.Margin = new Padding(3, 4, 3, 4);
+            btnCube.Location = new Point(13, 78);
             btnCube.Name = "btnCube";
-            btnCube.Size = new Size(202, 57);
+            btnCube.Size = new Size(176, 43);
             btnCube.TabIndex = 0;
             btnCube.Text = "Cubo";
             btnCube.UseVisualStyleBackColor = true;
@@ -368,14 +370,13 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(1239, 749);
+            ClientSize = new Size(1084, 562);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Margin = new Padding(3, 4, 3, 4);
-            MinimumSize = new Size(774, 646);
+            MinimumSize = new Size(679, 494);
             Name = "Form1";
             Text = "Form1";
             panel1.ResumeLayout(false);
@@ -408,7 +409,7 @@
         private FontAwesome.Sharp.IconButton btnCilinder;
         private Label label2;
         private FontAwesome.Sharp.IconButton btnRotate;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton btnTraslate;
         private Label label3;
         private Label lbMode;
         private Label label5;
@@ -417,5 +418,6 @@
         private ColorDialog figureColor;
         private PictureBox picColor;
         private FontAwesome.Sharp.IconButton FusionButton;
+        private FontAwesome.Sharp.IconButton btnScale;
     }
 }

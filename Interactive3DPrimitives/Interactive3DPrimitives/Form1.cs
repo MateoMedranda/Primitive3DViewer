@@ -15,11 +15,17 @@ namespace Interactive3DPrimitives
         private bool drawCylinder = false;
         private bool holding = false;
         private bool rotateOn = false;
+        private bool scaleOn = false;
+        private bool traslateOn = false;
         private bool fusion = false;
-        int cont = 0, lastdx,lastdy;
+        private bool messageOn = false;
+        int cont = 0, lastdx, lastdy;
         private Point previusMouse;
-        float angleX = 0f;
-        float angleY = 0f;
+        private float angleX = 0f;
+        private float angleY = 0f;
+        private int translationX = 0;
+        private int translationY = 0;
+        private int scala = 100;
         Color color = Color.FromArgb(50, 255, 0, 0);
         Cono cone = new Cono();
         Cilindro cilinder = new Cilindro();
@@ -73,17 +79,20 @@ namespace Interactive3DPrimitives
         private void drawCubeAtScreen(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 2);
+            cubo.generateCube(scala);
             cubo.ReadData(color, picCanvas.Width, picCanvas.Height, 400, g);
             cubo.changeAngle(-angleX, -angleY);
+            cubo.changeTraslation(translationX, translationY);
             cubo.drawCube();
         }
 
         private void drawSphereAtScreen(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 2);
-            esfera.genetateSphere();
+            esfera.genetateSphere(scala);
             esfera.ReadData(color, picCanvas.Width, picCanvas.Height, 400, g);
             esfera.changeAngle(-angleX, -angleY);
+            esfera.changeTraslation(translationX, translationY);
             esfera.drawSphere();
         }
 
@@ -139,7 +148,7 @@ namespace Interactive3DPrimitives
                 lastdx = dx;
                 lastdy = dy;
                 picCanvas.Invalidate();
-                if (rotateOn && !drawCube)
+                if (rotateOn && drawCube)
                 {
                     angleY += dx * 0.01f;
                     angleX += dy * 0.01f;
@@ -153,7 +162,7 @@ namespace Interactive3DPrimitives
                     cone.RotarX(dy);
 
                     previusMouse = e.Location;
-                    
+
                 }
                 if (rotateOn && drawSphere)
                 {
@@ -208,10 +217,10 @@ namespace Interactive3DPrimitives
         {
             if (e.Button == MouseButtons.Left)
             {
-                if(holding && conecreated && rotateOn)
+                if (holding && conecreated && rotateOn)
                     continuarRotacion(lastdx, lastdy);
                 holding = false;
-                
+
             }
 
         }
@@ -222,13 +231,13 @@ namespace Interactive3DPrimitives
             {
                 btnRotate.BackColor = Color.GreenYellow;
                 rotateOn = true;
-                lbMode.Text = "Rotaci�n";
+                lbMode.Text = "Rotación";
             }
             else
             {
                 btnRotate.BackColor = Color.White;
                 rotateOn = false;
-                lbMode.Text = "Est�tico";
+                lbMode.Text = "Estático";
             }
 
         }
@@ -261,7 +270,7 @@ namespace Interactive3DPrimitives
                     cont = 0;
                 }
             }
-            else if(!conecreated)
+            else if (!conecreated)
             {
                 conecreated = true;
                 drawCube = false;
@@ -277,30 +286,38 @@ namespace Interactive3DPrimitives
         }
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
-
-            if (!conecreated && !drawCube)
+            if (scaleOn)
             {
-                MessageBox.Show("No puedes manipular la figura sin generarla");
-                return;
-            }
 
-            if (mousScrollValue == 1 && e.Delta < 0)
-            {
-                MessageBox.Show("No puedes achicar mas la figura");
-                return;
-            }
-            if (e.Delta > 0)
-                mousScrollValue++;
-            else
-                mousScrollValue--;
+                if (!conecreated && !drawCube && !drawSphere)
+                {
+                    MessageBox.Show("No puedes manipular la figura sin generarla");
+                    return;
+                }
 
-            if (conecreated)
-            {
-                float factor = 5 / 10 + mousScrollValue / valInicial;
-                cone.EscalarCono(factor, factor);
-                valInicial = mousScrollValue;
+                if (mousScrollValue == 1 && e.Delta < 0 && !messageOn)
+                {
+                    return;
+                }
+                if (e.Delta > 0)
+                {
+                    mousScrollValue++;
+                    scala = scala + 10;
+                }
+                else
+                {
+                    mousScrollValue--;
+                    scala = scala - 10;
+                }
+
+                if (conecreated)
+                {
+                    float factor = 5 / 10 + mousScrollValue / valInicial;
+                    cone.EscalarCono(factor, factor);
+                    valInicial = mousScrollValue;
+                }
+                picCanvas.Invalidate();
             }
-            picCanvas.Invalidate();
 
         }
 
@@ -321,7 +338,7 @@ namespace Interactive3DPrimitives
                     cont = 0;
                 }
             }
-            else if(!drawSphere)
+            else if (!drawSphere)
             {
                 drawSphere = true;
                 drawCube = false;
@@ -334,7 +351,11 @@ namespace Interactive3DPrimitives
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (!conecreated && !drawCube)
+            if (traslateOn)
+            {
+
+            
+            if (!conecreated && !drawCube && !drawSphere)
             {
                 MessageBox.Show("No puedes manipular la figura sin generarla");
                 return true;
@@ -346,6 +367,29 @@ namespace Interactive3DPrimitives
             else if (keyData == Keys.Left) mov = 3;
             else if (keyData == Keys.Right) mov = 4;
 
+            //Manejo de traslación para el cubo y la esfera 
+            if (drawCube || drawSphere)
+            {
+
+                switch (mov)
+                {
+                    case 1:
+                        translationY--;
+                        break;
+                    case 2:
+                        translationY++;
+                        break;
+                    case 3:
+                        translationX--;
+                        break;
+                    case 4:
+                        translationX++;
+                        break;
+                }
+                picCanvas.Invalidate();
+                return true;
+            }
+
             if (conecreated)
             {
                 if (cone.ComprobarCentro(picCanvas))
@@ -355,15 +399,19 @@ namespace Interactive3DPrimitives
                     {
                         case 1:
                             cone.MoverPuntosY(-5);
+
                             break;
                         case 2:
                             cone.MoverPuntosY(5);
+
                             break;
                         case 3:
                             cone.MoverPuntosX(5);
+
                             break;
                         case 4:
                             cone.MoverPuntosX(-5);
+
                             break;
                     }
                     return true;
@@ -386,7 +434,7 @@ namespace Interactive3DPrimitives
                 picCanvas.Invalidate();
                 return true;
             }
-
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -401,19 +449,20 @@ namespace Interactive3DPrimitives
             lbFigure.Text = "";
             if (fusion)
             {
-                if(cont <= 1 && !drawCylinder)
+                if (cont <= 1 && !drawCylinder)
                 {
                     cont++;
                     drawCylinder = true;
                     lbFigure.Text += "Cilindro ";
                 }
-                
-                if(cont==2)
+
+                if (cont == 2)
                 {
                     fusion = false;
                     cont = 0;
                 }
-            } else if (!drawCylinder)
+            }
+            else if (!drawCylinder)
             {
                 drawCylinder = true;
                 drawSphere = false;
@@ -433,6 +482,38 @@ namespace Interactive3DPrimitives
             drawSphere = false;
             drawCube = false;
             conecreated = false;
+        }
+
+        private void btnScale_Click(object sender, EventArgs e)
+        {
+            if (!scaleOn)
+            {
+                btnScale.BackColor = Color.GreenYellow;
+                scaleOn = true;
+                lbMode.Text = "Escalado";
+            }
+            else
+            {
+                btnScale.BackColor = Color.White;
+                scaleOn = false;
+                lbMode.Text = "Estático";
+            }
+        }
+
+        private void btnTraslate_Click(object sender, EventArgs e)
+        {
+            if (!traslateOn)
+            {
+                btnTraslate.BackColor = Color.GreenYellow;
+                traslateOn = true;
+                lbMode.Text = "Traslación";
+            }
+            else
+            {
+                btnTraslate.BackColor = Color.White;
+                traslateOn = false;
+                lbMode.Text = "Estático";
+            }
         }
     }
 }
