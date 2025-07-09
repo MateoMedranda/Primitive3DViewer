@@ -1,20 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "VP0bgDYBUt8=",
+  "dgSpecHash": "CBYgFeGaPr8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
+  "projectFilePath": "C:\\Users\\rouss\\Source\\Repos\\Primitive3DViewerCopia\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\gmlop\\.nuget\\packages\\fontawesome.sharp\\6.6.0\\fontawesome.sharp.6.6.0.nupkg.sha512"
+    "C:\\Users\\rouss\\.nuget\\packages\\fontawesome.sharp\\6.6.0\\fontawesome.sharp.6.6.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "message": "Problema al leer el archivo de caché C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
-      "projectPath": "C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\Interactive3DPrimitives.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

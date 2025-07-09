@@ -106,6 +106,12 @@ namespace Interactive3DPrimitives
             //Colorear las bases
             g.FillPolygon(mBrush, caraInferior.ToArray());
             g.FillPolygon(mBrush, caraSuperior.ToArray());
+            //Colorear eje
+            cPen = new Pen(Color.Black, 4);
+            g.DrawLine(cPen, new PointF(baseInferior[0].X + screenCenterX + 10,
+                -baseInferior[0].Y + screenCenterY - 10),
+               new PointF(baseSuperior[0].X + screenCenterX + 10,
+               -baseSuperior[0].Y + screenCenterY - 10));
         }
         public void RotarX(float angulo)
         {
@@ -166,9 +172,44 @@ namespace Interactive3DPrimitives
             }
         }
 
-        public void drawCylinder()
+        public void moverX(String direction)
         {
-
+            Boolean positive=(direction=="right")? true:false;  
+            foreach (Vector3 vertex in baseInferior)
+            {
+                vertex.X += (positive) ? 5 : -5;
+            }
+            foreach (Vector3 vertex in baseSuperior)
+            {
+                vertex.X += (positive) ? 5 : -5;
+            }
+            screenCenterX += (positive) ? 5 : -5;
+        }
+        public void moverY(String direction)
+        {
+            Boolean positive = (direction.Equals("up")) ? true : false;
+            foreach (Vector3 vertex in baseInferior)
+            {
+                vertex.Y += (positive) ? 5 : -5;
+            }
+            foreach (Vector3 vertex in baseSuperior)
+            {
+                vertex.Y += (positive) ? 5 : -5;
+            }
+            screenCenterY += (positive) ? 5 : -5;
+        }
+        public void moverZ(String direction)
+        {
+            Boolean positive = (direction.Equals("up")) ? true : false;
+            foreach (Vector3 vertex in baseInferior)
+            {
+                vertex.Z += (positive) ? 5 : -5;
+            }
+            foreach (Vector3 vertex in baseSuperior)
+            {
+                vertex.Z += (positive) ? 5 : -5;
+            }
+            screenCenterY += (positive) ? 5 : -5;
         }
 
     }
