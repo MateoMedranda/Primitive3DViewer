@@ -117,13 +117,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché C:\\Users\\gmlop\\Desktop\\ESPE\\Computacion Grafica\\unidad2\\Primitive3DViewer\\Interactive3DPrimitives\\Interactive3DPrimitives\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
-    }
-  ]
+  }
 }

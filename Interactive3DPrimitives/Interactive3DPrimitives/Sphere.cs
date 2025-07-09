@@ -16,6 +16,8 @@ namespace Interactive3DPrimitives
         private int canvasHeight;
         private float angleX = 0f;
         private float angleY = 0f;
+        private int traslationX = 0;
+        private int traslationY = 0;
         private Graphics mgraph;
         private Color colorSphere;
         private List<float[]> sphereVertex = new List<float[]>();
@@ -27,9 +29,9 @@ namespace Interactive3DPrimitives
 
         }
 
-        public void genetateSphere()
+        public void genetateSphere(int n)
         {
-            radius = 100;
+            radius = n;
             sphereVertex.Clear();
             for (float theta = 0; theta <= 2 * Math.PI; theta = theta + distancePoints)
             {
@@ -46,8 +48,8 @@ namespace Interactive3DPrimitives
 
         private Point proyectPoint(float x, float y, float z)
         {
-            float xp = ((x * d) / (d + z)) + canvasWidth / 2;
-            float yp = ((y * d) / (d + z)) + canvasHeight / 2;
+            float xp = ((x * d) / (d + z)) + canvasWidth / 2 + traslationX;
+            float yp = ((y * d) / (d + z)) + canvasHeight / 2 + traslationY;
             return new Point((int)xp, (int)yp);
         }
 
@@ -55,6 +57,12 @@ namespace Interactive3DPrimitives
         {
             angleX = ax;
             angleY = ay;
+        }
+
+        public void changeTraslation(int tx, int ty)
+        {
+            traslationY = ty;
+            traslationX = tx;
         }
 
         public void ReadData(Color color, int camWidth, int camHeight, int nd, Graphics g)
