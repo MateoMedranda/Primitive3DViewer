@@ -10,8 +10,8 @@ namespace Interactive3DPrimitives
 {
     internal class Cilindro
     {
-        private int radioBase;
-        private int alturaCilindro;
+        private float radioBase;
+        private float alturaCilindro;
         private List<Vector3> baseInferior;
         private List<Vector3> baseSuperior;
         private int screenCenterX;
@@ -24,6 +24,7 @@ namespace Interactive3DPrimitives
             radioBase = 100;
             alturaCilindro = 400;
             segmentosVerticales = 36;
+            shapeColor = Color.FromArgb(100, 45, 120, 12);
         }
         public void setCenter(int centerX, int centerY)
         {
@@ -38,7 +39,7 @@ namespace Interactive3DPrimitives
         {
             baseInferior = new List<Vector3>();
             baseSuperior = new List<Vector3>();
-            int midHeight = alturaCilindro / 2;
+            float midHeight = alturaCilindro / 2;
             baseInferior.Add(new Vector3(0, -midHeight, 0));
             baseSuperior.Add(new Vector3(0, midHeight,0));
             for (int i = 0; i <= segmentosVerticales; i++)
@@ -212,6 +213,10 @@ namespace Interactive3DPrimitives
             screenCenterY += (positive) ? 5 : -5;
         }
 
+        public void escalarCilindro(float factor)
+        {
+            //Pendiente
+        }
 
 
         

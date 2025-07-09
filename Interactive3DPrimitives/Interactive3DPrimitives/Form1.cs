@@ -19,7 +19,7 @@ namespace Interactive3DPrimitives
         private bool traslateOn = false;
         private bool fusion = false;
         private bool messageOn = false;
-        int cont = 0, lastdx, lastdy;
+        int cont = 0, lastdx, lastdy,contMessage = 0;
         private Point previusMouse;
         private float angleX = 0f;
         private float angleY = 0f;
@@ -191,6 +191,24 @@ namespace Interactive3DPrimitives
                     cone.RotarY(dx);
                     cone.RotarX(dy);
                 }
+                if (drawCube && i % 2 == 0)
+                {
+                    angleY += dx * 0.01f;
+                    angleX += dy * 0.01f;
+                }
+
+                
+                if (drawSphere)
+                {
+                    angleY += dx * 0.01f;
+                    angleX += dy * 0.01f;
+                }
+                if (drawCylinder)
+                {
+                    cilinder.RotarY(dx);
+                    cilinder.RotarX(dy);
+                }
+
                 picCanvas.Invalidate();
 
                 dx = (int)(dx * 1.01);
@@ -205,6 +223,22 @@ namespace Interactive3DPrimitives
                     cone.RotarY(dx);
                     cone.RotarX(dy);
                 }
+                if (drawCube && i%2==0)
+                {
+                    angleY += dx * 0.01f;
+                    angleX += dy * 0.01f;
+                }
+
+                if (drawSphere)
+                {
+                    angleY += dx * 0.01f;
+                    angleX += dy * 0.01f;
+                }
+                if (drawCylinder)
+                {
+                    cilinder.RotarY(dx);
+                    cilinder.RotarX(dy);
+                }
                 picCanvas.Invalidate();
 
                 dx = (int)(dx * 0.95);
@@ -217,7 +251,7 @@ namespace Interactive3DPrimitives
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (holding && conecreated && rotateOn)
+                if (holding && rotateOn)
                     continuarRotacion(lastdx, lastdy);
                 holding = false;
 
@@ -289,9 +323,14 @@ namespace Interactive3DPrimitives
             if (scaleOn)
             {
 
-                if (!conecreated && !drawCube && !drawSphere)
+                if (!conecreated && !drawCube && !drawSphere && !drawCylinder)
                 {
+                    if (contMessage > 0)
+                    {
+                        return;
+                    }
                     MessageBox.Show("No puedes manipular la figura sin generarla");
+                    contMessage++;
                     return;
                 }
 
@@ -309,11 +348,17 @@ namespace Interactive3DPrimitives
                     mousScrollValue--;
                     scala = scala - 10;
                 }
-
+                contMessage = 0;
                 if (conecreated)
                 {
                     float factor = 5 / 10 + mousScrollValue / valInicial;
                     cone.EscalarCono(factor, factor);
+                    valInicial = mousScrollValue;
+                }
+                if(drawCylinder)
+                {
+                    float factor = 5 / 10 + mousScrollValue / valInicial;
+                    cilinder.escalarCilindro(factor);
                     valInicial = mousScrollValue;
                 }
                 picCanvas.Invalidate();
@@ -365,28 +410,28 @@ namespace Interactive3DPrimitives
                 else if (keyData == Keys.Left) mov = 3;
                 else if (keyData == Keys.Right) mov = 4;
 
-                //Manejo de traslación para el cubo y la esfera 
-                if (drawCube || drawSphere)
-                {
+            //Manejo de traslación para el cubo y la esfera 
+            if (drawCube || drawSphere)
+            {
 
-                    switch (mov)
-                    {
-                        case 1:
-                            translationY--;
-                            break;
-                        case 2:
-                            translationY++;
-                            break;
-                        case 3:
-                            translationX--;
-                            break;
-                        case 4:
-                            translationX++;
-                            break;
-                    }
-                    picCanvas.Invalidate();
-                    return true;
+                switch (mov)
+                {
+                    case 1:
+                        translationY-=5;
+                        break;
+                    case 2:
+                        translationY+=5;
+                        break;
+                    case 3:
+                        translationX-=5;
+                        break;
+                    case 4:
+                        translationX+=5;
+                        break;
                 }
+                picCanvas.Invalidate();
+
+            }
 
                 if (conecreated)
                 {
