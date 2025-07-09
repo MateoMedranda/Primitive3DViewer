@@ -212,6 +212,9 @@ namespace Interactive3DPrimitives
             screenCenterY += (positive) ? 5 : -5;
         }
 
+
+
+        
     }
 
 }

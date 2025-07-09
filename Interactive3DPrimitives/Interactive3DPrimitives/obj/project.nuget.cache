@@ -6,5 +6,12 @@
   "expectedPackageFiles": [
     "C:\\Users\\rouss\\.nuget\\packages\\fontawesome.sharp\\6.6.0\\fontawesome.sharp.6.6.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema al leer el archivo de caché C:\\Users\\rouss\\Source\\Repos\\Primitive3DViewerCopia\\Interactive3DPrimitives\\Interactive3DPrimitives\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
