@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.Devices;
 
 namespace Interactive3DPrimitives
 {
@@ -144,6 +145,10 @@ namespace Interactive3DPrimitives
         {
             if (holding)
             {
+                if(rotateOn)
+                {
+                    Cursor.Current = Cursors.SizeAll;
+                }
                 int dx = e.X - previusMouse.X;
                 int dy = -(e.Y - previusMouse.Y);
                 lastdx = dx;

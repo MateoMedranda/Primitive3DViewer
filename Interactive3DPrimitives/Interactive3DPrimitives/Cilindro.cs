@@ -24,6 +24,7 @@ namespace Interactive3DPrimitives
         private PointF shapeCenterRelative;
         private Color shapeColor;
         private int segmentosVerticales;
+        private Color baseColor;
 
         public Cilindro()
         {
@@ -37,6 +38,7 @@ namespace Interactive3DPrimitives
         {
             screenCenterX = centerX;
             screenCenterY = centerY;
+
         }
         public void getColor(Color newColor)
         {
@@ -63,6 +65,7 @@ namespace Interactive3DPrimitives
 
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             Pen cPen = new Pen(Color.Black, 2);
+            SolidBrush mBrush = new SolidBrush(shapeColor);
             List<PointF> caraInferior = new List<PointF>();
             List<PointF> caraSuperior = new List<PointF>();
             //Dibujar base inferior
@@ -76,6 +79,7 @@ namespace Interactive3DPrimitives
                 caraInferior.Add(actualRelativo);
                 caraInferior.Add(siguienteRelativo);
             }
+            g.FillPolygon(mBrush, caraInferior.ToArray());
             //Dibujar base superior
             for (int i = 1; i < segmentosVerticales + 1; i++)
             {
@@ -87,7 +91,9 @@ namespace Interactive3DPrimitives
                 caraSuperior.Add(actualRelativo);
                 caraSuperior.Add(siguienteRelativo);
             }
+            g.FillPolygon(mBrush, caraSuperior.ToArray());
             //Dibujar líneas verticales
+            mBrush.Color = shapeColor;
             for (int i = 1; i < segmentosVerticales; i+=(segmentosVerticales/12))
             {
                 Vector3 superior = baseSuperior[i];
@@ -96,7 +102,7 @@ namespace Interactive3DPrimitives
                new PointF(superior.X + screenCenterX, -superior.Y + screenCenterY));
             }
             //Colorear los lados
-            SolidBrush mBrush=new SolidBrush(shapeColor);
+            
             for(int i = 1;i < segmentosVerticales + 1;i++)
             {
                 Vector3 superior = baseSuperior[i];
@@ -111,15 +117,7 @@ namespace Interactive3DPrimitives
                    ];
                 g.FillPolygon(mBrush, polygon);
             }
-            //Colorear las bases
-            g.FillPolygon(mBrush, caraInferior.ToArray());
-            g.FillPolygon(mBrush, caraSuperior.ToArray());
-            //Colorear eje
-            cPen = new Pen(Color.Black, 4);
-            mBrush.Color = Color.Red;
-            g.FillEllipse(mBrush, screenCenterX + shapeCenter.X - 5f, screenCenterY - shapeCenter.Y - 5f, 10, 10);
-            g.FillEllipse(mBrush, screenCenterX +baseInferior[0].X - 5f,  screenCenterY-baseInferior[0].Y - 5f, 10, 10);
-            g.FillEllipse(mBrush, screenCenterX + baseSuperior[0].X - 5f, screenCenterY - baseSuperior[0].Y - 5f, 10, 10);
+            
 
         }
         public void RotarX(float angulo)
@@ -170,31 +168,7 @@ namespace Interactive3DPrimitives
             punto.setX(x * (float)Math.Cos(rad) + z * (float)Math.Sin(rad));
             punto.setZ(-x * (float)Math.Sin(rad) + z * (float)Math.Cos(rad));
         }
-        public void RotarZ(float angulo)
-        {
-            //Girar el centr
-            foreach (var low in baseInferior)
-            {
-                centrarPunto(low);
-                rotarPuntoZ(low, angulo);
-                retornarPuntoCentrado(low);
-            }
-            foreach (var top in baseSuperior)
-            {
-                centrarPunto(top);
-                rotarPuntoY(top, angulo);
-                centrarPunto(top);
-            }
-        }
 
-        public void rotarPuntoZ(Vector3 punto, float angulo)
-        {
-            float rad = angulo * (float)Math.PI / 180f;
-            float x = punto.getX();
-            float y = punto.getY();
-            punto.setY(x * (float)Math.Cos(rad) - y * (float)Math.Sin(rad));
-            punto.setZ(x * (float)Math.Sin(rad) + y * (float)Math.Cos(rad));
-        }
 
         public void centrarPunto(Vector3 punto)
         {
@@ -237,51 +211,17 @@ namespace Interactive3DPrimitives
             }
             shapeCenter.Y+= (positive) ? 5 : -5;
         }
-        public void moverZ(String direction)
-        {
-            Boolean positive = (direction.Equals("up")) ? true : false;
-            foreach (Vector3 vertex in baseInferior)
-            {
-                vertex.Z += (positive) ? 5 : -5;
-                vertex.Y += (positive) ? 5 : -5;
-            }
-            foreach (Vector3 vertex in baseSuperior)
-            {
-                vertex.Z += (positive) ? 5 : -5;
-                vertex.Y += (positive) ? 5 : -5;
-            }
-            shapeCenter.Y += (positive) ? 5 : -5;
-            shapeCenter.Z += (positive) ? 5: -5;
-        }
-        public bool cilindroDesplazado()
-        {
-            if(shapeCenter.X!=0 || shapeCenter.Y!=0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public Vector3 obtenerDesplazamiento()
-        {
-            return new Vector3(
-                shapeCenter.X,
-                shapeCenter.Y,
-                0
-                );
-        }
+
 
         public void escalarCilindro(float factor)
         {
-            bool muyChico = (alturaCilindro <= 20 && radioBase <= 12 && factor < 1);
-            bool muyAlto = (shapeCenter.Y + (alturaCilindro / 2) >= (screenCenterY*2)-20 ) && factor>1;
-            bool muyAncho = (shapeCenter.X + radioBase >= (screenCenterX * 2)-20) && factor >1;
+            float newHeight = alturaCilindro * factor;
+            float newRadius = radioBase * factor;
+            bool muyChico = (newHeight <= 20 && newRadius <= 12 && factor < 1);
+            bool muyAlto = (shapeCenter.Y + (newHeight / 2) >= (screenCenterY*2)-20 ) && factor>1;
+            bool muyAncho = (shapeCenter.X + newRadius >= (screenCenterX * 2)-20) && factor >1;
             if (!muyAlto && !muyChico && !muyAncho)
             {
-                float newHeight = alturaCilindro * factor;
-                float newRadius = radioBase * factor;
                 float dx, dy, dz;
                 float module;
                 Vector3 originalScale;
@@ -296,9 +236,7 @@ namespace Interactive3DPrimitives
                 }
                 radioBase = newRadius;
                 alturaCilindro = newHeight;
-            }
-            
-            
+            }   
         }
 
         public void vectorialScale(Vector3 vertex,float factor)
@@ -309,14 +247,8 @@ namespace Interactive3DPrimitives
             dx = vertex.X - shapeCenter.X;
             dy = vertex.Y - shapeCenter.Y;
             dz = vertex.Z - shapeCenter.Z;
-
-
-
             module = (float)Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2) + Math.Pow(dz, 2));
-
-
             vUnit = new Vector3(dx / module, dy / module, dz / module);
-
             vertex.X = vUnit.X * factor * module;
             vertex.Y = vUnit.Y * factor * module;
             vertex.Z = vUnit.Z * factor * module;
