@@ -31,7 +31,8 @@ namespace Interactive3DPrimitives
         Cilindro cilinder = new Cilindro();
         bool conecreated = false;
         float mousScrollValue = 1;
-        float alt, rad, valInicial = 1;
+        float altCono, radCono, valInicial = 1;
+        float altCilindro, radCilindro;
 
         public Form1()
         {
@@ -315,8 +316,8 @@ namespace Interactive3DPrimitives
             picCanvas.Invalidate();
             cone.setCenter(picCanvas.Width / 2, picCanvas.Height / 2);
             cone.GenerarCono();
-            alt = cone.altura;
-            rad = cone.radio;
+            altCono = cone.altura;
+            radCono = cone.radio;
         }
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -357,7 +358,7 @@ namespace Interactive3DPrimitives
                 }
                 if(drawCylinder)
                 {
-                    float factor = 5 / 10 + mousScrollValue / valInicial;
+                    float factor = 5/ 10 + mousScrollValue / valInicial;
                     cilinder.escalarCilindro(factor);
                     valInicial = mousScrollValue;
                 }
@@ -483,10 +484,10 @@ namespace Interactive3DPrimitives
                     switch (mov)
                     {
                         case 1:
-                            cilinder.moverZ("down");
+                            cilinder.moverY("up");
                             break;
                         case 2:
-                            cilinder.moverZ("up");
+                            cilinder.moverY("down");
                             break;
                         case 3:
                             cilinder.moverX("left");
@@ -537,6 +538,7 @@ namespace Interactive3DPrimitives
             cilinder.setCenter(picCanvas.Width / 2, picCanvas.Height / 2);
             cilinder.generateCylinder();
             picCanvas.Invalidate();
+
         }
 
         private void iconButton1_Click(object sender, EventArgs e)
